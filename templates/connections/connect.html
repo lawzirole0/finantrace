@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load connection_tags %}
+{% block title %}Connect Platform{% endblock %}
+{% block content %}
+<div class="max-w-2xl mx-auto">
+    <a href="/connections/" class="inline-flex items-center gap-2 text-sm text-[#737687] hover:text-[#0043ce] mb-6 transition-colors">
+        <span class="material-symbols-outlined">arrow_back</span> Back to Connections
+    </a>
+
+    <div class="bg-white rounded-2xl border border-[#c3c5d9]/30 shadow-sm p-8">
+        <h2 class="text-[28px] font-bold text-[#131b2e] mb-2">Connect a Platform</h2>
+        <p class="text-[#434656] mb-8">Choose a platform to connect. Your data will sync automatically and appear in your dashboard.</p>
+
+        <form method="POST" class="space-y-6">
+            {% csrf_token %}
+
+            <div>
+                <label class="block text-sm font-bold text-[#131b2e] mb-3">Select Platform</label>
+                <div class="grid grid-cols-2 gap-3">
+                    {% for value, label in platforms %}
+                    {% with info=platform_info|dict_key:value %}
+                    <label class="flex items-center gap-4 p-4 rounded-xl border border-[#c3c5d9]/30 hover:border-[#0043ce] hover:bg-[#f2f3ff] transition-all cursor-pointer has-[:checked]:border-[#0043ce] has-[:checked]:bg-[#e2e7ff]">
+                        <input type="radio" name="platform" value="{{ value }}" class="sr-only peer">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style="background: {{ info.bg|default:'#f2f3ff' }}; color: {{ info.color|default:'#0043ce' }}">
+                            <span class="material-symbols-outlined">{{ info.icon|default:'link' }}</span>
+                        </div>
+                        <span class="text-sm font-bold text-[#131b2e] peer-checked:text-[#0043ce]">{{ label }}</span>
+                    </label>
+                    {% endwith %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-bold text-[#131b2e] mb-2">Label (optional)</label>
+                <input type="text" name="label" placeholder="e.g. My Business Stripe" class="w-full px-4 py-3 rounded-xl border border-[#c3c5d9] focus:ring-[#0043ce] focus:border-[#0043ce] text-sm">
+            </div>
+
+            <div>
+                <label class="block text-sm font-bold text-[#131b2e] mb-2">Account Name</label>
+                <input type="text" name="account_name" placeholder="e.g. My Store LLC" class="w-full px-4 py-3 rounded-xl border border-[#c3c5d9] focus:ring-[#0043ce] focus:border-[#0043ce] text-sm">
+            </div>
+
+            <div>
+                <label class="block text-sm font-bold text-[#131b2e] mb-2">Account Email</label>
+                <input type="email" name="account_email" placeholder="business@email.com" class="w-full px-4 py-3 rounded-xl border border-[#c3c5d9] focus:ring-[#0043ce] focus:border-[#0043ce] text-sm">
+            </div>
+
+            <div class="bg-[#d3e4fe] p-5 rounded-xl">
+                <div class="flex items-start gap-3">
+                    <span class="material-symbols-outlined text-[#435369]">security</span>
+                    <div>
+                        <p class="text-sm font-bold text-[#38485d]">Your data is secure</p>
+                        <p class="text-xs text-[#435369] mt-1">Connection credentials are encrypted. You can disconnect any platform at any time.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 pt-4">
+                <button type="submit" class="px-8 py-3.5 bg-[#0043ce] text-white rounded-xl font-bold hover:bg-[#1e5af9] transition-all shadow-md flex items-center gap-2">
+                    <span class="material-symbols-outlined">link</span> Connect Platform
+                </button>
+                <a href="/connections/" class="px-8 py-3.5 border border-[#c3c5d9] text-[#131b2e] rounded-xl font-medium hover:bg-[#f2f3ff] transition-all text-center">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

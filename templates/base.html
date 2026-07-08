@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>{% block title %}finanTrace{% endblock %} | Business Co-pilot</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #faf8ff; color: #131b2e; -webkit-font-smoothing: antialiased; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(8px); border: 1px solid #e2e8f0; }
+    .sidebar-active { box-shadow: inset 4px 0 0 0 #0043ce; }
+    .roadmap-line { background: repeating-linear-gradient(to bottom, transparent, transparent 10px, #cbd5e1 10px, #cbd5e1 20px); }
+    .idea-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+</style>
+</head>
+<body class="overflow-x-hidden">
+{% if user.is_authenticated %}
+{% include 'global/sidebar.html' %}
+{% include 'global/topbar.html' %}
+<main class="ml-64 pt-24 pb-12 px-[40px] min-h-screen">
+    <div class="max-w-[1440px] mx-auto">
+    {% block content %}{% endblock %}
+    </div>
+</main>
+{% else %}
+{% block standalone %}{% endblock %}
+{% endif %}
+{% block scripts %}{% endblock %}
+</body>
+</html>

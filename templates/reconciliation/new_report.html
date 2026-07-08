@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Reconciliation - finanTrace{% endblock %}
+{% block content %}
+<div class="mb-8">
+    <h2 class="text-[32px] font-bold text-[#131b2e]">Daily Report Check</h2>
+    <p class="text-[#434656] mt-2">Enter your bank numbers. We'll check if everything balances.</p>
+</div>
+<div class="max-w-2xl">
+    <div class="bg-white border border-[#c3c5d9]/30 rounded-2xl p-8 shadow-sm">
+        <form method="post" action="/reconciliation/result/">
+            {% csrf_token %}
+            <div class="grid grid-cols-2 gap-6 mb-8">
+                <div>
+                    <label class="text-sm font-medium text-[#131b2e] block mb-2">Opening Balance</label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[#737687] font-bold">$</span>
+                        <input type="number" name="opening" step="0.01" class="w-full h-14 pl-10 pr-4 bg-[#f2f3ff] border-none rounded-xl text-lg font-bold focus:ring-2 focus:ring-[#0043ce]/20" placeholder="0.00" required>
+                    </div>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-[#131b2e] block mb-2">Total Deposits</label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[#737687] font-bold">$</span>
+                        <input type="number" name="deposits" step="0.01" class="w-full h-14 pl-10 pr-4 bg-[#f2f3ff] border-none rounded-xl text-lg font-bold focus:ring-2 focus:ring-[#0043ce]/20" placeholder="0.00" required>
+                    </div>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-[#131b2e] block mb-2">Total Withdrawals</label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[#737687] font-bold">$</span>
+                        <input type="number" name="withdrawals" step="0.01" class="w-full h-14 pl-10 pr-4 bg-[#f2f3ff] border-none rounded-xl text-lg font-bold focus:ring-2 focus:ring-[#0043ce]/20" placeholder="0.00" required>
+                    </div>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-[#131b2e] block mb-2">Closing Balance</label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[#737687] font-bold">$</span>
+                        <input type="number" name="closing" step="0.01" class="w-full h-14 pl-10 pr-4 bg-[#f2f3ff] border-none rounded-xl text-lg font-bold focus:ring-2 focus:ring-[#0043ce]/20" placeholder="0.00" required>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="w-full h-14 bg-[#0043ce] text-white rounded-xl font-bold text-lg hover:bg-[#1e5af9] transition-all shadow-lg flex items-center justify-center gap-3">
+                <span class="material-symbols-outlined">sync</span>
+                Check Balance
+            </button>
+            <p class="text-center text-xs text-[#737687] mt-4">Free uses remaining: {{ trial_uses_remaining }}/3</p>
+        </form>
+    </div>
+    <div class="mt-6 p-4 bg-[#d3e4fe] rounded-xl">
+        <div class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-[#435369]">tips_and_updates</span>
+            <p class="text-sm text-[#38485d]">Tip: Your closing balance should equal: Opening + Deposits - Withdrawals. We'll do the math for you.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

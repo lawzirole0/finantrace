@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% load currency_tags %}
+{% block title %}Pricing - finanTrace{% endblock %}
+{% block standalone %}
+<div class="min-h-screen bg-[#faf8ff]">
+    <nav class="flex items-center justify-between px-10 py-6 max-w-[1440px] mx-auto">
+        <div class="flex items-center gap-3">
+            <a href="/" class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-[#1e5af9] rounded-lg flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+                </div>
+                <span class="text-2xl font-bold text-[#0043ce]">finanTrace</span>
+            </a>
+        </div>
+        <a href="/accounts/signup/" class="px-6 py-2.5 bg-[#0043ce] text-white rounded-xl font-medium hover:bg-[#1e5af9] transition-all shadow-md">Start Free</a>
+    </nav>
+    <main class="px-10 pb-20">
+        <div class="max-w-[1200px] mx-auto text-center pt-16">
+            <h1 class="text-4xl font-bold mb-4">Pick your plan. Grow at your pace.</h1>
+            <p class="text-lg text-[#434656] mb-4 max-w-2xl mx-auto">Every plan includes access to business idea research. Upgrade when you need more — no lock-in, cancel anytime.</p>
+            <div class="inline-flex items-center gap-3 px-4 py-2 bg-white rounded-full border border-[#c3c5d9]/30 shadow-sm mb-12">
+                <span class="text-sm font-bold text-[#131b2e]">Monthly</span>
+                <span class="px-3 py-1 bg-[#0043ce]/10 text-[#0043ce] text-xs font-bold rounded-full">Save 20% with yearly</span>
+            </div>
+            <div class="grid grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="bg-white rounded-2xl p-8 border border-[#c3c5d9]/30 text-left relative flex flex-col">
+                    <h3 class="text-xl font-bold mb-1">Free</h3>
+                    <p class="text-sm text-[#737687] mb-4">Try before you commit</p>
+                    <p class="text-4xl font-bold mb-6">{{ currency_symbol }}0</p>
+                    <p class="text-xs text-[#737687] -mt-4 mb-6">forever, no credit card</p>
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <p class="text-xs font-bold text-[#737687] uppercase tracking-wider mb-3">Business Research</p>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]">Browse 9 researched ideas</span></li>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]">View cost & timeline for 1 idea</span></li>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]">See market demand scores</span></li>
+                        <div class="border-t border-[#c3c5d9]/20 my-3"></div>
+                        <p class="text-xs font-bold text-[#737687] uppercase tracking-wider mb-3">Finance Tools</p>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]">3 bank report checks</span></li>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]">Basic error detection</span></li>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]">1 device = 1 profile</span></li>
+                    </ul>
+                    <a href="/accounts/signup/" class="block w-full py-3 border border-[#c3c5d9] text-center rounded-xl font-medium hover:bg-[#f2f3ff] transition-colors">Get Started Free</a>
+                </div>
+                <div class="bg-white rounded-2xl p-8 border-2 border-[#0043ce] text-left relative flex flex-col shadow-lg">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#0043ce] text-white px-4 py-1 rounded-full text-xs font-bold">MOST POPULAR</div>
+                    <div class="absolute top-4 right-4">
+                        <span class="text-[10px] bg-[#006e2f]/10 text-[#006e2f] px-2 py-1 rounded-full font-bold">&#9733; BEST VALUE</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-1">Startup</h3>
+                    <p class="text-sm text-[#737687] mb-4">For serious founders</p>
+                    <p class="text-4xl font-bold mb-2">{{ currency_symbol }}5<span class="text-lg text-[#737687]">/mo</span></p>
+                    <p class="text-xs text-[#737687] mb-6">billed monthly &middot; cancel anytime</p>
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <p class="text-xs font-bold text-[#737687] uppercase tracking-wider mb-3">Business Research</p>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]"><strong>Unlimited</strong> idea browsing</span></li>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]">Full analysis for <strong>all</strong> ideas</span></li>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]">Save & bookmark ideas</span></li>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]">Personal match scores</span></li>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]">Compare ideas side-by-side</span></li>
+                        <div class="border-t border-[#c3c5d9]/20 my-3"></div>
+                        <p class="text-xs font-bold text-[#737687] uppercase tracking-wider mb-3">Finance Tools</p>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]"><strong>Unlimited</strong> bank checks</span></li>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]">Full error trace with suggestions</span></li>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]">Revenue & expense tracking</span></li>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]">All 5 profession paths</span></li>
+                        <div class="border-t border-[#c3c5d9]/20 my-3"></div>
+                        <p class="text-xs font-bold text-[#737687] uppercase tracking-wider mb-3">Support</p>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]">Email support</span></li>
+                    </ul>
+                    {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'subscribe' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="plan" value="startup">
+                        <button type="submit" class="w-full py-3 bg-[#0043ce] text-white text-center rounded-xl font-bold hover:bg-[#1e5af9] transition-all shadow-md">Subscribe {{ currency_symbol }}5/mo</button>
+                    </form>
+                    {% else %}
+                    <a href="/accounts/signup/" class="block w-full py-3 bg-[#0043ce] text-white text-center rounded-xl font-bold hover:bg-[#1e5af9] transition-all shadow-md">Subscribe {{ currency_symbol }}5/mo</a>
+                    {% endif %}
+                    <p class="text-center text-xs text-[#006e2f] font-bold mt-3">&#9733; 7-day free trial included</p>
+                </div>
+                <div class="bg-white rounded-2xl p-8 border border-[#c3c5d9]/30 text-left relative flex flex-col">
+                    <h3 class="text-xl font-bold mb-1">Growing</h3>
+                    <p class="text-sm text-[#737687] mb-4">For scaling businesses</p>
+                    <p class="text-4xl font-bold mb-2">{{ currency_symbol }}10<span class="text-lg text-[#737687]">/mo</span></p>
+                    <p class="text-xs text-[#737687] mb-6">billed monthly &middot; cancel anytime</p>
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <p class="text-xs font-bold text-[#737687] uppercase tracking-wider mb-3">Business Research</p>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]"><strong>Everything in Startup</strong> +</span></li>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]"><strong>AI personalized</strong> idea suggestions</span></li>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]">Custom market research reports</span></li>
+                        <div class="border-t border-[#c3c5d9]/20 my-3"></div>
+                        <p class="text-xs font-bold text-[#737687] uppercase tracking-wider mb-3">Finance Tools</p>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]">Real-time monitoring alerts</span></li>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]">Automated daily finance routines</span></li>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]">Advanced analytics & projections</span></li>
+                        <div class="border-t border-[#c3c5d9]/20 my-3"></div>
+                        <p class="text-xs font-bold text-[#737687] uppercase tracking-wider mb-3">Support</p>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]"><strong>Priority chat</strong> support</span></li>
+                        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm text-[#434656]">Early access to new features</span></li>
+                    </ul>
+                    {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'subscribe' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="plan" value="growing">
+                        <button type="submit" class="w-full py-3 bg-[#131b2e] text-white text-center rounded-xl font-bold hover:bg-[#434656] transition-all shadow-md">Subscribe {{ currency_symbol }}10/mo</button>
+                    </form>
+                    {% else %}
+                    <a href="/accounts/signup/" class="block w-full py-3 bg-[#131b2e] text-white text-center rounded-xl font-bold hover:bg-[#434656] transition-all shadow-md">Subscribe {{ currency_symbol }}10/mo</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="mt-16 max-w-5xl mx-auto">
+                <h2 class="text-2xl font-bold mb-8">Compare all features side-by-side</h2>
+                <div class="bg-white rounded-2xl border border-[#c3c5d9]/30 overflow-hidden shadow-sm">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="border-b border-[#c3c5d9]/20 bg-[#f2f3ff]">
+                                <th class="px-6 py-4 text-sm font-bold text-[#131b2e]">Feature</th>
+                                <th class="px-6 py-4 text-sm font-bold text-[#737687] text-center">Free</th>
+                                <th class="px-6 py-4 text-sm font-bold text-[#0043ce] text-center">Startup</th>
+                                <th class="px-6 py-4 text-sm font-bold text-[#131b2e] text-center">Growing</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-[#c3c5d9]/10">
+                            <tr class="bg-[#faf8ff]"><td colspan="4" class="px-6 py-3 text-xs font-bold text-[#737687] uppercase tracking-wider">Business Idea Research</td></tr>
+                            <tr><td class="px-6 py-4 text-sm">Browse business ideas</td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003; 9 ideas</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003; Unlimited</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003; Unlimited</span></td></tr>
+                            <tr><td class="px-6 py-4 text-sm">Full idea analysis (cost, timeline, steps)</td><td class="px-6 py-4 text-center"><span class="text-[#737687]">1 idea</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003; All ideas</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003; All ideas</span></td></tr>
+                            <tr><td class="px-6 py-4 text-sm">Market demand & growth scores</td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003;</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003;</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003;</span></td></tr>
+                            <tr><td class="px-6 py-4 text-sm">Save & bookmark ideas</td><td class="px-6 py-4 text-center"><span class="text-[#737687]">&mdash;</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003;</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003;</span></td></tr>
+                            <tr><td class="px-6 py-4 text-sm">Personalized match scores</td><td class="px-6 py-4 text-center"><span class="text-[#737687]">&mdash;</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003;</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003;</span></td></tr>
+                            <tr><td class="px-6 py-4 text-sm">Side-by-side idea comparison</td><td class="px-6 py-4 text-center"><span class="text-[#737687]">&mdash;</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003;</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003;</span></td></tr>
+                            <tr><td class="px-6 py-4 text-sm">AI personalized suggestions</td><td class="px-6 py-4 text-center"><span class="text-[#737687]">&mdash;</span></td><td class="px-6 py-4 text-center"><span class="text-[#737687]">&mdash;</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003;</span></td></tr>
+                            <tr class="bg-[#faf8ff]"><td colspan="4" class="px-6 py-3 text-xs font-bold text-[#737687] uppercase tracking-wider">Finance & Reconciliation</td></tr>
+                            <tr><td class="px-6 py-4 text-sm">Bank report checks</td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">3 checks</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003; Unlimited</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003; Unlimited</span></td></tr>
+                            <tr><td class="px-6 py-4 text-sm">Error detection with causes</td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">Basic</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">Full engine</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">Full engine</span></td></tr>
+                            <tr><td class="px-6 py-4 text-sm">Profession step-by-step paths</td><td class="px-6 py-4 text-center"><span class="text-[#737687]">1 path</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">All 5</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">All 5</span></td></tr>
+                            <tr><td class="px-6 py-4 text-sm">Real-time monitoring alerts</td><td class="px-6 py-4 text-center"><span class="text-[#737687]">&mdash;</span></td><td class="px-6 py-4 text-center"><span class="text-[#737687]">&mdash;</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003;</span></td></tr>
+                            <tr><td class="px-6 py-4 text-sm">Advanced analytics & projections</td><td class="px-6 py-4 text-center"><span class="text-[#737687]">&mdash;</span></td><td class="px-6 py-4 text-center"><span class="text-[#737687]">&mdash;</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003;</span></td></tr>
+                            <tr class="bg-[#faf8ff]"><td colspan="4" class="px-6 py-3 text-xs font-bold text-[#737687] uppercase tracking-wider">Account & Support</td></tr>
+                            <tr><td class="px-6 py-4 text-sm">Devices</td><td class="px-6 py-4 text-center">1</td><td class="px-6 py-4 text-center">3</td><td class="px-6 py-4 text-center">Unlimited</td></tr>
+                            <tr><td class="px-6 py-4 text-sm">Support</td><td class="px-6 py-4 text-center"><span class="text-[#737687]">Email (48h)</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">Email (24h)</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">Priority chat</span></td></tr>
+                            <tr><td class="px-6 py-4 text-sm">Cancel anytime</td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003;</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003;</span></td><td class="px-6 py-4 text-center"><span class="text-[#006e2f]">&#10003;</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="mt-16 max-w-5xl mx-auto">
+                <h2 class="text-2xl font-bold mb-8">Your satisfaction is guaranteed</h2>
+                <div class="grid grid-cols-3 gap-6">
+                    <div class="bg-white p-8 rounded-2xl border border-[#c3c5d9]/30 text-left">
+                        <div class="w-14 h-14 bg-[#006e2f]/10 rounded-2xl flex items-center justify-center text-[#006e2f] mb-5 mx-auto">
+                            <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">verified</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-3 text-center">7-Day Free Trial</h3>
+                        <p class="text-sm text-[#434656] text-center">Try Startup plan free for 7 days. No charge, no commitment. Cancel in one click.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl border border-[#c3c5d9]/30 text-left">
+                        <div class="w-14 h-14 bg-[#0043ce]/10 rounded-2xl flex items-center justify-center text-[#0043ce] mb-5 mx-auto">
+                            <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">autorenew</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-3 text-center">Cancel Anytime</h3>
+                        <p class="text-sm text-[#434656] text-center">No lock-in contracts. Downgrade or cancel from settings. Keep your data forever.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl border border-[#c3c5d9]/30 text-left">
+                        <div class="w-14 h-14 bg-[#1e5af9]/10 rounded-2xl flex items-center justify-center text-[#1e5af9] mb-5 mx-auto">
+                            <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-3 text-center">Idea Satisfaction</h3>
+                        <p class="text-sm text-[#434656] text-center">Not finding the right business idea? We'll help you research — or your next month is free.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-16 max-w-3xl mx-auto">
+                <h2 class="text-2xl font-bold mb-8">Frequently asked questions</h2>
+                <div class="space-y-4 text-left">
+                    <div class="bg-white p-6 rounded-2xl border border-[#c3c5d9]/30">
+                        <h4 class="font-bold mb-2">Can I switch plans anytime?</h4>
+                        <p class="text-sm text-[#434656]">Yes. Upgrade or downgrade instantly from Settings. If you upgrade, you get full access immediately. If you downgrade, changes apply at next billing cycle.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-[#c3c5d9]/30">
+                        <h4 class="font-bold mb-2">What happens to my data if I cancel?</h4>
+                        <p class="text-sm text-[#434656]">Your data stays yours forever. If you cancel, you keep read-only access. Reactivate anytime to pick up where you left off.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-[#c3c5d9]/30">
+                        <h4 class="font-bold mb-2">How does the Idea Satisfaction Guarantee work?</h4>
+                        <p class="text-sm text-[#434656]">If you're on Startup or Growing and haven't found a viable business idea after researching, contact us. We'll do personalized research for you — and if we can't find something suitable, your next month is free.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-[#c3c5d9]/30">
+                        <h4 class="font-bold mb-2">Can I start with Free and upgrade later?</h4>
+                        <p class="text-sm text-[#434656]">Absolutely. Start with 3 free checks and 1 idea analysis. When you're ready to explore more, upgrade to Startup. All your data carries over.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-16 pb-8">
+                <h2 class="text-2xl font-bold mb-4">Ready to find your business idea?</h2>
+                <p class="text-[#434656] mb-8">Start free. No credit card needed. Upgrade only when you're ready.</p>
+                <a href="/accounts/signup/" class="inline-flex items-center gap-2 px-10 py-4 bg-[#0043ce] text-white rounded-xl font-bold text-lg hover:bg-[#1e5af9] transition-all shadow-lg">
+                    Start Free Now
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock %}

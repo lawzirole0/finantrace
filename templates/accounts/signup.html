@@ -1,0 +1,59 @@
+{% extends 'landing/index.html' %}
+{% block standalone %}
+<div class="min-h-screen bg-[#faf8ff] flex items-center justify-center py-10">
+    <div class="w-full max-w-lg mx-4">
+        <div class="text-center mb-8">
+            <a href="/" class="inline-flex items-center gap-3">
+                <div class="w-10 h-10 bg-[#1e5af9] rounded-lg flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+                </div>
+                <span class="text-2xl font-bold text-[#0043ce]">finanTrace</span>
+            </a>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-[#c3c5d9]/30">
+            <h2 class="text-2xl font-bold mb-2">Start your journey</h2>
+            <p class="text-[#434656] mb-8">Create an account and pick your path.</p>
+            <form method="post" class="space-y-5">
+                {% csrf_token %}
+                <div>
+                    <label class="text-sm font-medium text-[#131b2e] block mb-2">Username</label>
+                    <input type="text" name="username" class="w-full h-12 px-4 bg-[#f2f3ff] rounded-xl border-none focus:ring-2 focus:ring-[#0043ce]/20 text-sm" placeholder="Choose a username" required>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-[#131b2e] block mb-2">Email</label>
+                    <input type="email" name="email" class="w-full h-12 px-4 bg-[#f2f3ff] rounded-xl border-none focus:ring-2 focus:ring-[#0043ce]/20 text-sm" placeholder="your@email.com" required>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-[#131b2e] block mb-2">I want to start as a...</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        {% for val, label in form.fields.profession.choices %}
+                        <label class="flex items-center gap-3 p-4 rounded-xl border border-[#c3c5d9]/30 cursor-pointer hover:bg-[#e2e7ff] transition-colors has-[:checked]:border-[#0043ce] has-[:checked]:bg-[#0043ce]/5">
+                            <input type="radio" name="profession" value="{{ val }}" class="text-[#0043ce] focus:ring-[#0043ce]" {% if forloop.first %}checked{% endif %}>
+                            <span class="text-sm font-medium">{{ label }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-[#131b2e] block mb-2">Currency</label>
+                    <select name="currency" class="w-full h-12 px-4 bg-[#f2f3ff] rounded-xl border-none focus:ring-2 focus:ring-[#0043ce]/20 text-sm">
+                        {% for val, label in form.fields.currency.choices %}
+                        <option value="{{ val }}" {% if val == 'USD' %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-[#131b2e] block mb-2">Password</label>
+                    <input type="password" name="password1" class="w-full h-12 px-4 bg-[#f2f3ff] rounded-xl border-none focus:ring-2 focus:ring-[#0043ce]/20 text-sm" placeholder="Create a password" required>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-[#131b2e] block mb-2">Confirm password</label>
+                    <input type="password" name="password2" class="w-full h-12 px-4 bg-[#f2f3ff] rounded-xl border-none focus:ring-2 focus:ring-[#0043ce]/20 text-sm" placeholder="Confirm password" required>
+                </div>
+                <button type="submit" class="w-full h-12 bg-[#0043ce] text-white rounded-xl font-bold hover:bg-[#1e5af9] transition-all shadow-md">Create Account →</button>
+            </form>
+            <p class="text-center text-sm text-[#737687] mt-6">Already have an account? <a href="/accounts/login/" class="text-[#0043ce] font-bold hover:underline">Log in</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

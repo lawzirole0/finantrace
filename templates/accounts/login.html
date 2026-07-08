@@ -1,0 +1,35 @@
+{% extends 'landing/index.html' %}
+{% block standalone %}
+<div class="min-h-screen bg-[#faf8ff] flex items-center justify-center">
+    <div class="w-full max-w-md mx-4">
+        <div class="text-center mb-8">
+            <a href="/" class="inline-flex items-center gap-3">
+                <div class="w-10 h-10 bg-[#1e5af9] rounded-lg flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+                </div>
+                <span class="text-2xl font-bold text-[#0043ce]">finanTrace</span>
+            </a>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-[#c3c5d9]/30">
+            <h2 class="text-2xl font-bold mb-2">Welcome back</h2>
+            <p class="text-[#434656] mb-8">Log in to continue your business journey.</p>
+            <form method="post" class="space-y-5">
+                {% csrf_token %}
+                <div>
+                    <label class="text-sm font-medium text-[#131b2e] block mb-2">Username</label>
+                    <input type="text" name="username" class="w-full h-12 px-4 bg-[#f2f3ff] rounded-xl border-none focus:ring-2 focus:ring-[#0043ce]/20 text-sm" placeholder="Enter your username" required>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-[#131b2e] block mb-2">Password</label>
+                    <input type="password" name="password" class="w-full h-12 px-4 bg-[#f2f3ff] rounded-xl border-none focus:ring-2 focus:ring-[#0043ce]/20 text-sm" placeholder="Enter your password" required>
+                </div>
+                {% if form.errors %}
+                <p class="text-sm text-[#ba1a1a] bg-[#ffdad6] p-3 rounded-xl">Invalid username or password.</p>
+                {% endif %}
+                <button type="submit" class="w-full h-12 bg-[#0043ce] text-white rounded-xl font-bold hover:bg-[#1e5af9] transition-all shadow-md">Log In</button>
+            </form>
+            <p class="text-center text-sm text-[#737687] mt-6">Don't have an account? <a href="/accounts/signup/" class="text-[#0043ce] font-bold hover:underline">Sign up free</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

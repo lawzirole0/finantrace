@@ -1,0 +1,306 @@
+{% extends 'base.html' %}
+{% load currency_tags %}
+{% block title %}Business Growth Guide - finanTrace{% endblock %}
+{% block standalone %}
+<div class="min-h-screen bg-[#faf8ff]">
+    <nav class="flex items-center justify-between px-10 py-6 max-w-[1440px] mx-auto">
+        <div class="flex items-center gap-3">
+            <a href="/" class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-[#1e5af9] rounded-lg flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+                </div>
+                <span class="text-2xl font-bold text-[#0043ce]">finanTrace</span>
+            </a>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="/pricing/" class="px-5 py-2 text-[#0043ce] font-medium hover:bg-[#e2e7ff] rounded-xl transition-colors">Pricing</a>
+            <a href="/accounts/signup/" class="px-6 py-2.5 bg-[#0043ce] text-white rounded-xl font-medium hover:bg-[#1e5af9] transition-all shadow-md">Start Free</a>
+        </div>
+    </nav>
+    <main class="px-10 pb-20">
+        <div class="max-w-[1000px] mx-auto">
+            <div class="text-center py-16">
+                <div class="inline-flex items-center px-3 py-1 bg-[#006e2f]/10 text-[#006e2f] rounded-full text-xs font-bold mb-6">Complete beginner? Start here</div>
+                <h1 class="text-[48px] font-bold leading-[56px] tracking-[-0.02em] text-[#131b2e]">How to grow any business<br><span class="text-[#0043ce]">from zero to success</span></h1>
+                <p class="text-lg text-[#434656] mt-6 max-w-2xl mx-auto leading-relaxed">A simple 5-phase playbook. Whether you're a freelancer, retailer, or creator — every business follows the same growth path. Follow these phases in order.</p>
+                <div class="flex items-center justify-center gap-4 mt-10">
+                    <a href="/accounts/signup/" class="px-8 py-4 bg-[#0043ce] text-white rounded-xl font-bold text-lg hover:bg-[#1e5af9] transition-all shadow-lg flex items-center gap-2">
+                        Start Your Journey
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                    <a href="#phases" class="px-8 py-4 border border-[#c3c5d9] text-[#131b2e] rounded-xl font-medium hover:bg-white transition-all">Read the Guide</a>
+                </div>
+            </div>
+            <div class="flex items-center justify-center gap-8 mb-16 p-8 bg-white rounded-2xl border border-[#c3c5d9]/30 shadow-sm">
+                <div class="text-center"><span class="text-3xl font-bold text-[#0043ce]">5</span><p class="text-xs text-[#737687] mt-1">Phases</p></div>
+                <div class="w-px h-12 bg-[#c3c5d9]/30"></div>
+                <div class="text-center"><span class="text-3xl font-bold text-[#0043ce]">20+</span><p class="text-xs text-[#737687] mt-1">Action Steps</p></div>
+                <div class="w-px h-12 bg-[#c3c5d9]/30"></div>
+                <div class="text-center"><span class="text-3xl font-bold text-[#0043ce]">{{ currency_symbol }}0</span><p class="text-xs text-[#737687] mt-1">To Start</p></div>
+                <div class="w-px h-12 bg-[#c3c5d9]/30"></div>
+                <div class="text-center"><span class="text-3xl font-bold text-[#0043ce]">5</span><p class="text-xs text-[#737687] mt-1">Professions</p></div>
+            </div>
+            <div id="phases" class="space-y-12">
+                <div class="bg-white rounded-2xl p-10 border border-[#c3c5d9]/30 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-48 h-48 bg-[#0043ce]/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+                    <div class="flex items-start gap-6 relative">
+                        <div class="w-16 h-16 bg-[#0043ce] rounded-2xl flex items-center justify-center text-white text-2xl font-bold shrink-0 shadow-lg">1</div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-2">
+                                <h2 class="text-2xl font-bold">Find Your Idea</h2>
+                                <span class="px-3 py-1 bg-[#006e2f]/10 text-[#006e2f] rounded-full text-xs font-bold">Weeks 1-2</span>
+                            </div>
+                            <p class="text-[#434656] mb-6">Every business starts with an idea. But not just any idea — one that matches your skills, interests, and market demand. Don't overthink this phase. Pick something and start.</p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="p-5 bg-[#f2f3ff] rounded-xl">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="material-symbols-outlined text-[#0043ce]">explore</span>
+                                        <h3 class="font-bold">1. Brainstorm</h3>
+                                    </div>
+                                    <p class="text-sm text-[#434656]">List 5 business ideas based on what you already know or enjoy. Don't judge — just write.</p>
+                                </div>
+                                <div class="p-5 bg-[#f2f3ff] rounded-xl">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="material-symbols-outlined text-[#0043ce]">trending_up</span>
+                                        <h3 class="font-bold">2. Check Demand</h3>
+                                    </div>
+                                    <p class="text-sm text-[#434656]">Research if people actually want this. Search Google, check forums, look at competitors.</p>
+                                </div>
+                                <div class="p-5 bg-[#f2f3ff] rounded-xl">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="material-symbols-outlined text-[#0043ce]">savings</span>
+                                        <h3 class="font-bold">3. Estimate Costs</h3>
+                                    </div>
+                                    <p class="text-sm text-[#434656]">What do you need to start? Tools, materials, licenses. Most businesses start under {{ currency_symbol }}1,000.</p>
+                                </div>
+                                <div class="p-5 bg-[#f2f3ff] rounded-xl">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="material-symbols-outlined text-[#0043ce]">check_circle</span>
+                                        <h3 class="font-bold">4. Pick One</h3>
+                                    </div>
+                                    <p class="text-sm text-[#434656]">Choose the idea with the best mix of demand, low cost, and personal interest. Commit for 90 days.</p>
+                                </div>
+                            </div>
+                            <div class="mt-6 p-5 bg-[#d3e4fe] rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-[#435369]">tips_and_updates</span>
+                                    <p class="text-sm text-[#38485d]"><strong>finanTrace helps:</strong> Browse <a href="/ideas/" class="text-[#0043ce] font-bold hover:underline">9 researched business ideas</a> with transparent cost, timeline, and demand scores. No guesswork.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-10 border border-[#c3c5d9]/30 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-48 h-48 bg-[#006e2f]/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+                    <div class="flex items-start gap-6 relative">
+                        <div class="w-16 h-16 bg-[#006e2f] rounded-2xl flex items-center justify-center text-white text-2xl font-bold shrink-0 shadow-lg">2</div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-2">
+                                <h2 class="text-2xl font-bold">Set Up Your Foundation</h2>
+                                <span class="px-3 py-1 bg-[#006e2f]/10 text-[#006e2f] rounded-full text-xs font-bold">Weeks 3-4</span>
+                            </div>
+                            <p class="text-[#434656] mb-6">Before you make money, you need the basics: a way to get paid, a place to operate, and a system to track everything. Set these up once and they'll serve you forever.</p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="p-5 bg-[#f2f3ff] rounded-xl">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="material-symbols-outlined text-[#006e2f]">account_balance</span>
+                                        <h3 class="font-bold">1. Business Banking</h3>
+                                    </div>
+                                    <p class="text-sm text-[#434656]">Open a separate bank account for your business. Keep personal and business money separate from day one.</p>
+                                </div>
+                                <div class="p-5 bg-[#f2f3ff] rounded-xl">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="material-symbols-outlined text-[#006e2f]">receipt</span>
+                                        <h3 class="font-bold">2. Payment Method</h3>
+                                    </div>
+                                    <p class="text-sm text-[#434656]">Set up Stripe, PayPal, Square, or bank transfers. Make it easy for customers to pay you.</p>
+                                </div>
+                                <div class="p-5 bg-[#f2f3ff] rounded-xl">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="material-symbols-outlined text-[#006e2f]">description</span>
+                                        <h3 class="font-bold">3. Simple Contract</h3>
+                                    </div>
+                                    <p class="text-sm text-[#434656]">Create a one-page agreement template. Covers scope, price, timeline, and payment terms.</p>
+                                </div>
+                                <div class="p-5 bg-[#f2f3ff] rounded-xl">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="material-symbols-outlined text-[#006e2f]">sync_alt</span>
+                                        <h3 class="font-bold">4. Daily Finance Check</h3>
+                                    </div>
+                                    <p class="text-sm text-[#434656]">Start tracking opening balance, deposits, withdrawals, and closing balance every day.</p>
+                                </div>
+                            </div>
+                            <div class="mt-6 p-5 bg-[#d3e4fe] rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-[#435369]">tips_and_updates</span>
+                                    <p class="text-sm text-[#38485d]"><strong>finanTrace helps:</strong> Use the <a href="/reconciliation/" class="text-[#0043ce] font-bold hover:underline">Reconciliation tool</a> to check your daily numbers. It instantly tells you if anything is off and explains why.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-10 border border-[#c3c5d9]/30 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-48 h-48 bg-[#1e5af9]/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+                    <div class="flex items-start gap-6 relative">
+                        <div class="w-16 h-16 bg-[#1e5af9] rounded-2xl flex items-center justify-center text-white text-2xl font-bold shrink-0 shadow-lg">3</div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-2">
+                                <h2 class="text-2xl font-bold">Get Your First Customers</h2>
+                                <span class="px-3 py-1 bg-[#006e2f]/10 text-[#006e2f] rounded-full text-xs font-bold">Weeks 5-8</span>
+                            </div>
+                            <p class="text-[#434656] mb-6">This is the hardest part for most people. The secret? Start with people you already know. Then ask for referrals. One customer leads to the next.</p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="p-5 bg-[#f2f3ff] rounded-xl">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="material-symbols-outlined text-[#1e5af9]">people</span>
+                                        <h3 class="font-bold">1. Tell Everyone</h3>
+                                    </div>
+                                    <p class="text-sm text-[#434656]">Tell friends, family, and social media followers what you're doing. First customers often come from your network.</p>
+                                </div>
+                                <div class="p-5 bg-[#f2f3ff] rounded-xl">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="material-symbols-outlined text-[#1e5af9]">campaign</span>
+                                        <h3 class="font-bold">2. Find First 3</h3>
+                                    </div>
+                                    <p class="text-sm text-[#434656]">Identify 3 potential customers. Offer a discount or free trial. Focus on getting testimonials, not profit.</p>
+                                </div>
+                                <div class="p-5 bg-[#f2f3ff] rounded-xl">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="material-symbols-outlined text-[#1e5af9]">star</span>
+                                        <h3 class="font-bold">3. Get Reviews</h3>
+                                    </div>
+                                    <p class="text-sm text-[#434656]">Ask every happy customer for a review on Google, Yelp, or social media. Social proof drives new business.</p>
+                                </div>
+                                <div class="p-5 bg-[#f2f3ff] rounded-xl">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="material-symbols-outlined text-[#1e5af9]">repeat</span>
+                                        <h3 class="font-bold">4. Referral System</h3>
+                                    </div>
+                                    <p class="text-sm text-[#434656]">Create a simple referral program. "Refer a friend and you both get 10% off." Your best customers bring more.</p>
+                                </div>
+                            </div>
+                            <div class="mt-6 p-5 bg-[#d3e4fe] rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-[#435369]">tips_and_updates</span>
+                                    <p class="text-sm text-[#38485d]"><strong>Pro tip:</strong> Most businesses fail because they stop marketing after the first sale. Always be looking for the next customer. Follow your <a href="/paths/" class="text-[#0043ce] font-bold hover:underline">profession path</a> for daily checklists.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-10 border border-[#c3c5d9]/30 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-48 h-48 bg-[#435369]/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+                    <div class="flex items-start gap-6 relative">
+                        <div class="w-16 h-16 bg-[#435369] rounded-2xl flex items-center justify-center text-white text-2xl font-bold shrink-0 shadow-lg">4</div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-2">
+                                <h2 class="text-2xl font-bold">Track & Optimize</h2>
+                                <span class="px-3 py-1 bg-[#006e2f]/10 text-[#006e2f] rounded-full text-xs font-bold">Months 2-3</span>
+                            </div>
+                            <p class="text-[#434656] mb-6">Once you have customers, you need to know if you're actually making money. Track everything, find what's working, and do more of that. Cut what isn't working.</p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="p-5 bg-[#f2f3ff] rounded-xl">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="material-symbols-outlined text-[#435369]">monitoring</span>
+                                        <h3 class="font-bold">1. Track Revenue</h3>
+                                    </div>
+                                    <p class="text-sm text-[#434656]">Record every dollar that comes in. Know your monthly revenue, best-selling products, and peak seasons.</p>
+                                </div>
+                                <div class="p-5 bg-[#f2f3ff] rounded-xl">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="material-symbols-outlined text-[#435369]">receipt_long</span>
+                                        <h3 class="font-bold">2. Track Expenses</h3>
+                                    </div>
+                                    <p class="text-sm text-[#434656]">Every dollar out matters. Categorize expenses (materials, marketing, tools). Know your profit, not just revenue.</p>
+                                </div>
+                                <div class="p-5 bg-[#f2f3ff] rounded-xl">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="material-symbols-outlined text-[#435369]">compare_arrows</span>
+                                        <h3 class="font-bold">3. Find What Works</h3>
+                                    </div>
+                                    <p class="text-sm text-[#434656]">Which marketing channel brings the most customers? Which product has the best margin? Double down on winners.</p>
+                                </div>
+                                <div class="p-5 bg-[#f2f3ff] rounded-xl">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="material-symbols-outlined text-[#435369]">trending_up</span>
+                                        <h3 class="font-bold">4. Set Growth Goals</h3>
+                                    </div>
+                                    <p class="text-sm text-[#434656]">Set a monthly revenue target. Break it down: "I need 5 new customers at {{ currency_symbol }}100 each." Track progress weekly.</p>
+                                </div>
+                            </div>
+                            <div class="mt-6 p-5 bg-[#d3e4fe] rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-[#435369]">tips_and_updates</span>
+                                    <p class="text-sm text-[#38485d]"><strong>finanTrace helps:</strong> The <a href="/finance/" class="text-[#0043ce] font-bold hover:underline">Finance Hub</a> tracks income vs expenses and shows your accuracy rate. See exactly how your business is performing.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-10 border-2 border-[#0043ce] shadow-lg relative overflow-hidden">
+                    <div class="absolute -top-3 left-10 bg-[#0043ce] text-white px-4 py-1 rounded-full text-xs font-bold">YOU ARE HERE</div>
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-[#0043ce]/5 rounded-full -mr-20 -mt-20 blur-3xl"></div>
+                    <div class="flex items-start gap-6 relative">
+                        <div class="w-16 h-16 bg-[#0043ce] rounded-2xl flex items-center justify-center text-white text-2xl font-bold shrink-0 shadow-lg">5</div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-2">
+                                <h2 class="text-2xl font-bold">Scale & Systemize</h2>
+                                <span class="px-3 py-1 bg-[#0043ce]/10 text-[#0043ce] rounded-full text-xs font-bold">Months 3+</span>
+                            </div>
+                            <p class="text-[#434656] mb-6">You've proven your business works. Now it's time to grow without burning out. Build systems, hire help, and expand. This is where real wealth is built.</p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="p-5 bg-[#f2f3ff] rounded-xl border border-[#0043ce]/10">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="material-symbols-outlined text-[#0043ce]">repeat</span>
+                                        <h3 class="font-bold">1. Automate</h3>
+                                    </div>
+                                    <p class="text-sm text-[#434656]">Automate invoicing, email responses, scheduling, and bookkeeping. Spend your time on high-value work.</p>
+                                </div>
+                                <div class="p-5 bg-[#f2f3ff] rounded-xl border border-[#0043ce]/10">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="material-symbols-outlined text-[#0043ce]">groups</span>
+                                        <h3 class="font-bold">2. Hire Help</h3>
+                                    </div>
+                                    <p class="text-sm text-[#434656]">Hire a virtual assistant or freelancer for tasks you shouldn't be doing. Focus on growth, not busywork.</p>
+                                </div>
+                                <div class="p-5 bg-[#f2f3ff] rounded-xl border border-[#0043ce]/10">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="material-symbols-outlined text-[#0043ce]">add_circle</span>
+                                        <h3 class="font-bold">3. Expand Offerings</h3>
+                                    </div>
+                                    <p class="text-sm text-[#434656]">Add new products, services, or packages based on what your customers already buy from you.</p>
+                                </div>
+                                <div class="p-5 bg-[#f2f3ff] rounded-xl border border-[#0043ce]/10">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="material-symbols-outlined text-[#0043ce]">map</span>
+                                        <h3 class="font-bold">4. Plan Next Phase</h3>
+                                    </div>
+                                    <p class="text-sm text-[#434656]">Use the <a href="/roadmap/" class="text-[#0043ce] font-bold">Business Roadmap</a> to plan your next 6-12 months. Set milestones and track progress.</p>
+                                </div>
+                            </div>
+                            <div class="mt-6 p-5 bg-[#d3e4fe] rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-[#435369]">tips_and_updates</span>
+                                    <p class="text-sm text-[#38485d]"><strong>finanTrace helps:</strong> Upgrade to <a href="/pricing/" class="text-[#0043ce] font-bold hover:underline">Growing plan ({{ currency_symbol }}10/mo)</a> for AI suggestions, priority support, and advanced analytics to scale faster.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-16 text-center bg-white rounded-2xl p-12 border border-[#c3c5d9]/30 shadow-sm">
+                <h2 class="text-3xl font-bold mb-4">Ready to start your journey?</h2>
+                <p class="text-lg text-[#434656] mb-8 max-w-xl mx-auto">You don't need experience. You don't need a big budget. You just need to start and follow the system.</p>
+                <div class="flex items-center justify-center gap-4">
+                    <a href="/accounts/signup/" class="px-8 py-4 bg-[#0043ce] text-white rounded-xl font-bold text-lg hover:bg-[#1e5af9] transition-all shadow-lg flex items-center gap-2">
+                        Start Free - {{ currency_symbol }}0
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                    <a href="/pricing/" class="px-8 py-4 border border-[#c3c5d9] text-[#131b2e] rounded-xl font-medium hover:bg-white transition-all">Compare Plans ({{ currency_symbol }}5/mo or {{ currency_symbol }}10/mo)</a>
+                </div>
+                <p class="text-xs text-[#737687] mt-6">No credit card required. 7-day free trial on paid plans. Cancel anytime.</p>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock %}

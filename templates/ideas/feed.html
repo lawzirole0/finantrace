@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+{% load currency_tags %}
+{% block title %}Idea Discovery - finanTrace{% endblock %}
+{% block content %}
+<div class="flex justify-between items-end mb-8">
+    <div>
+        <h2 class="text-[32px] font-bold text-[#131b2e]">Idea Discovery</h2>
+        <p class="text-lg text-[#434656] mt-2 max-w-2xl">Research business ideas with transparent costs, timelines, and AI-powered personalized suggestions.</p>
+    </div>
+    <div class="flex gap-3">
+        <button class="flex items-center px-4 py-2 bg-white border border-[#c3c5d9] rounded-xl text-sm hover:bg-[#f2f3ff] transition-colors">
+            <span class="material-symbols-outlined mr-2">tune</span>Personalize Feed
+        </button>
+        <button class="flex items-center px-5 py-2 bg-[#0043ce] text-white rounded-xl text-sm shadow-md hover:bg-[#1e5af9] transition-colors">
+            <span class="material-symbols-outlined mr-2">add</span>Submit Idea
+        </button>
+    </div>
+</div>
+
+{% if messages %}
+<div class="mb-6 space-y-2">
+    {% for message in messages %}
+    <div class="flex items-center gap-3 p-4 rounded-xl {% if message.tags == 'success' %}bg-[#006e2f]/10 text-[#006e2f] border border-[#006e2f]/20{% elif message.tags == 'error' %}bg-[#ba1a1a]/10 text-[#ba1a1a] border border-[#ba1a1a]/20{% else %}bg-[#e2e7ff] text-[#0043ce] border border-[#0043ce]/10{% endif %}">
+        <span class="material-symbols-outlined text-sm">{% if message.tags == 'success' %}check_circle{% elif message.tags == 'error' %}error{% else %}info{% endif %}</span>
+        <span class="text-sm font-medium">{{ message }}</span>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="grid grid-cols-12 gap-6">
+    <aside class="col-span-3 space-y-6">
+        <div class="bg-white p-6 rounded-2xl border border-[#c3c5d9]/30 shadow-sm">
+            <h3 class="text-xl font-bold mb-4">Filters</h3>
+            <div class="space-y-6">
+                <div>
+                    <label class="text-sm text-[#737687] block mb-3">Industry</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center p-2 rounded-lg hover:bg-[#f2f3ff] cursor-pointer"><input checked type="checkbox" class="rounded text-[#0043ce] border-[#c3c5d9] focus:ring-[#0043ce] mr-3"><span class="text-sm">FinTech & SaaS</span></label>
+                        <label class="flex items-center p-2 rounded-lg hover:bg-[#f2f3ff] cursor-pointer"><input checked type="checkbox" class="rounded text-[#0043ce] border-[#c3c5d9] focus:ring-[#0043ce] mr-3"><span class="text-sm">Sustainable Energy</span></label>
+                        <label class="flex items-center p-2 rounded-lg hover:bg-[#f2f3ff] cursor-pointer"><input type="checkbox" class="rounded text-[#0043ce] border-[#c3c5d9] focus:ring-[#0043ce] mr-3"><span class="text-sm">Health & Wellness</span></label>
+                        <label class="flex items-center p-2 rounded-lg hover:bg-[#f2f3ff] cursor-pointer"><input type="checkbox" class="rounded text-[#0043ce] border-[#c3c5d9] focus:ring-[#0043ce] mr-3"><span class="text-sm">EdTech</span></label>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between items-center mb-3"><label class="text-sm text-[#737687]">Startup Cost</label><span class="text-[#0043ce] font-bold">Under {{ currency_symbol }}10k</span></div>
+                    <input type="range" class="w-full h-2 bg-[#e2e7ff] rounded-lg appearance-none cursor-pointer accent-[#0043ce]">
+                </div>
+                <div>
+                    <label class="text-sm text-[#737687] block mb-3">Risk Level</label>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="px-3 py-1 bg-[#006e2f]/10 text-[#006e2f] rounded-full text-xs font-bold">Low</button>
+                        <button class="px-3 py-1 bg-[#e2e7ff] text-[#737687] rounded-full text-xs font-bold">Medium</button>
+                        <button class="px-3 py-1 bg-[#e2e7ff] text-[#737687] rounded-full text-xs font-bold">High</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-gradient-to-br from-[#0043ce]/5 to-[#1e5af9]/10 p-6 rounded-2xl border-2 border-[#0043ce]/20">
+            <div class="flex items-center mb-4 text-[#0043ce]">
+                <span class="material-symbols-outlined mr-2" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                <h3 class="text-xl font-bold">AI Suggestions</h3>
+            </div>
+            <p class="text-sm text-[#434656] mb-4">Get 3 personalized business ideas powered by Gemini AI — tailored to your profession and interests.</p>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="get_ai_suggestions" value="1">
+                <div class="mb-4">
+                    <label class="text-xs font-bold text-[#131b2e] block mb-2">Your interests (optional)</label>
+                    <input type="text" name="interests" placeholder="e.g. tech, environment, education" class="w-full px-3 py-2 bg-white border border-[#c3c5d9] rounded-xl text-sm focus:ring-[#0043ce] focus:border-[#0043ce]">
+                </div>
+                <button type="submit" class="w-full py-3 bg-[#0043ce] text-white rounded-xl text-sm font-bold hover:bg-[#1e5af9] transition-all shadow-md flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+                    Generate Ideas
+                </button>
+            </form>
+        </div>
+        <div class="bg-[#0043ce]/5 p-6 rounded-2xl border-2 border-dashed border-[#0043ce]/20">
+            <div class="flex items-center mb-4 text-[#0043ce]"><span class="material-symbols-outlined mr-2">compare_arrows</span><h3 class="text-xl font-bold">Compare Ideas</h3></div>
+            <p class="text-sm text-[#434656] mb-4">Click &#9733; on ideas to save them for side-by-side comparison.</p>
+            <button class="w-full py-3 bg-white text-[#0043ce] border border-[#0043ce] rounded-xl text-sm hover:bg-[#0043ce] hover:text-white transition-all">Open Workspace (0)</button>
+        </div>
+    </aside>
+    <div class="col-span-9 space-y-8">
+        {% if ai_ideas %}
+        <div>
+            <div class="flex items-center gap-3 mb-4">
+                <span class="material-symbols-outlined text-[#0043ce]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                <h3 class="text-2xl font-bold text-[#131b2e]">AI-Powered Suggestions</h3>
+                <span class="px-3 py-1 bg-[#0043ce]/10 text-[#0043ce] rounded-full text-xs font-bold">Powered by Gemini</span>
+            </div>
+            <p class="text-sm text-[#434656] mb-6">Personalized for <strong>{{ user_profession|title }}</strong> based on your profile and interests.</p>
+            <div class="space-y-4">
+                {% for idea in ai_ideas %}
+                <div class="bg-white rounded-2xl border-2 border-[#0043ce]/20 hover:shadow-lg transition-all group">
+                    <div class="p-6">
+                        <div class="flex items-start gap-5">
+                            <div class="w-14 h-14 bg-gradient-to-br from-[#0043ce] to-[#1e5af9] rounded-2xl flex items-center justify-center text-white shrink-0">
+                                <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-start justify-between gap-4">
+                                    <div>
+                                        <h4 class="text-xl font-bold group-hover:text-[#0043ce] transition-colors">{{ idea.title }}</h4>
+                                        <p class="text-sm text-[#434656] mt-1">{{ idea.description }}</p>
+                                    </div>
+                                    <span class="material-symbols-outlined text-[#c3c5d9] group-hover:text-[#0043ce] transition-colors shrink-0">chevron_right</span>
+                                </div>
+                                <div class="mt-4 grid grid-cols-5 gap-4">
+                                    <div class="p-3 bg-[#f2f3ff] rounded-xl text-center">
+                                        <p class="text-[10px] uppercase tracking-wider text-[#737687] font-bold">Demand</p>
+                                        <span class="text-lg font-bold text-[#006e2f]">{{ idea.market_demand }}%</span>
+                                    </div>
+                                    <div class="p-3 bg-[#f2f3ff] rounded-xl text-center">
+                                        <p class="text-[10px] uppercase tracking-wider text-[#737687] font-bold">Start Cost</p>
+                                        <span class="text-lg font-bold">{{ idea.startup_cost }}</span>
+                                    </div>
+                                    <div class="p-3 bg-[#f2f3ff] rounded-xl text-center">
+                                        <p class="text-[10px] uppercase tracking-wider text-[#737687] font-bold">To Revenue</p>
+                                        <span class="text-lg font-bold">{{ idea.time_to_revenue }}</span>
+                                    </div>
+                                    <div class="p-3 bg-[#f2f3ff] rounded-xl text-center">
+                                        <p class="text-[10px] uppercase tracking-wider text-[#737687] font-bold">To Profit</p>
+                                        <span class="text-lg font-bold">{{ idea.time_to_profit }}</span>
+                                    </div>
+                                    <div class="p-3 bg-[#f2f3ff] rounded-xl text-center">
+                                        <p class="text-[10px] uppercase tracking-wider text-[#737687] font-bold">Risk</p>
+                                        <span class="text-lg font-bold {% if idea.risk == 'Low' %}text-[#006e2f]{% elif idea.risk == 'Medium' %}text-[#435369]{% else %}text-[#ba1a1a]{% endif %}">{{ idea.risk }}</span>
+                                    </div>
+                                </div>
+                                <div class="mt-4 flex items-center gap-4 text-xs text-[#737687]">
+                                    <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">savings</span> Profit: {{ idea.profit_range }}</span>
+                                    <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">trending_up</span> Growth: {{ idea.growth_potential }}%</span>
+                                    <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">check_circle</span> {{ idea.ease }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        <div>
+            <div class="flex items-center justify-between mb-6">
+                <span class="text-sm text-[#434656]">Showing <span class="font-bold text-[#131b2e]">{{ ideas|length }}</span> researched ideas</span>
+                <select class="bg-transparent border-none focus:ring-0 text-[#0043ce] cursor-pointer font-bold text-sm">
+                    <option>Best Match</option>
+                    <option>Market Demand (High)</option>
+                    <option>Lowest Startup Cost</option>
+                    <option>Fastest to Profit</option>
+                </select>
+            </div>
+            <div class="space-y-4">
+                {% for idea in ideas %}
+                <a href="/ideas/{{ idea.id }}/" class="block bg-white rounded-2xl border border-[#c3c5d9]/30 hover:shadow-lg transition-all group">
+                    <div class="p-6">
+                        <div class="flex items-start gap-5">
+                            <div class="w-14 h-14 bg-[#dce1ff] rounded-2xl flex items-center justify-center text-[#0043ce] shrink-0">
+                                <span class="material-symbols-outlined text-3xl">{{ idea.icon }}</span>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-start justify-between gap-4">
+                                    <div>
+                                        <h4 class="text-xl font-bold group-hover:text-[#0043ce] transition-colors">{{ idea.title }}</h4>
+                                        <p class="text-sm text-[#434656] mt-1">{{ idea.description }}</p>
+                                    </div>
+                                    <span class="material-symbols-outlined text-[#c3c5d9] group-hover:text-[#0043ce] transition-colors shrink-0">chevron_right</span>
+                                </div>
+                                <div class="mt-4 grid grid-cols-5 gap-4">
+                                    <div class="p-3 bg-[#f2f3ff] rounded-xl text-center">
+                                        <p class="text-[10px] uppercase tracking-wider text-[#737687] font-bold">Demand</p>
+                                        <span class="text-lg font-bold text-[#006e2f]">{{ idea.market_demand }}%</span>
+                                    </div>
+                                    <div class="p-3 bg-[#f2f3ff] rounded-xl text-center">
+                                        <p class="text-[10px] uppercase tracking-wider text-[#737687] font-bold">Start Cost</p>
+                                        <span class="text-lg font-bold">{{ currency_symbol }}{{ idea.startup_cost_min|floatformat:0 }}</span>
+                                    </div>
+                                    <div class="p-3 bg-[#f2f3ff] rounded-xl text-center">
+                                        <p class="text-[10px] uppercase tracking-wider text-[#737687] font-bold">To Revenue</p>
+                                        <span class="text-lg font-bold">{{ idea.time_to_revenue }}mo</span>
+                                    </div>
+                                    <div class="p-3 bg-[#f2f3ff] rounded-xl text-center">
+                                        <p class="text-[10px] uppercase tracking-wider text-[#737687] font-bold">To Profit</p>
+                                        <span class="text-lg font-bold">{{ idea.time_to_profit }}mo</span>
+                                    </div>
+                                    <div class="p-3 bg-[#f2f3ff] rounded-xl text-center">
+                                        <p class="text-[10px] uppercase tracking-wider text-[#737687] font-bold">Risk</p>
+                                        <span class="text-lg font-bold {% if idea.risk_level == 'low' %}text-[#006e2f]{% elif idea.risk_level == 'medium' %}text-[#435369]{% else %}text-[#ba1a1a]{% endif %}">{{ idea.get_risk_level_display }}</span>
+                                    </div>
+                                </div>
+                                <div class="mt-4 flex items-center gap-4 text-xs text-[#737687]">
+                                    <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">savings</span> Yearly: {{ currency_symbol }}{{ idea.profit_range_min }} - {{ currency_symbol }}{{ idea.profit_range_max }}</span>
+                                    <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">trending_up</span> Growth: {{ idea.growth_potential }}%</span>
+                                    <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">groups</span> {{ idea.get_industry_display }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+.env
+.env.example
+.git
+__pycache__
+*.pyc
+db.sqlite3
+staticfiles
+NUL
+server.log
+start_server.bat
+.venv
+venv

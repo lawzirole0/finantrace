@@ -1,0 +1,65 @@
+<aside class="h-screen w-64 fixed left-0 top-0 bg-[#f2f3ff] shadow-sm z-50 flex flex-col py-8 border-r border-[#c3c5d9]/30">
+    <div class="px-6 mb-10 flex items-center gap-3">
+        <div class="w-10 h-10 bg-[#1e5af9] rounded-lg flex items-center justify-center text-white">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+        </div>
+        <div>
+            <h1 class="text-[24px] font-bold text-[#0043ce] leading-tight">finanTrace</h1>
+            <p class="text-[10px] uppercase tracking-widest font-bold text-[#737687]">Business Co-pilot</p>
+        </div>
+    </div>
+    <nav class="flex-1 px-4 space-y-1">
+        <a href="/dashboard/" class="flex items-center gap-4 px-4 py-3 rounded-xl text-[#434656] hover:bg-[#e2e7ff] transition-colors">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span>Dashboard</span>
+        </a>
+        <a href="/ideas/" class="flex items-center gap-4 px-4 py-3 rounded-xl text-[#434656] hover:bg-[#e2e7ff] transition-colors">
+            <span class="material-symbols-outlined">explore</span>
+            <span>Idea Discovery</span>
+        </a>
+        <a href="/roadmap/" class="flex items-center gap-4 px-4 py-3 rounded-xl text-[#434656] hover:bg-[#e2e7ff] transition-colors">
+            <span class="material-symbols-outlined">map</span>
+            <span>Business Roadmap</span>
+        </a>
+        <a href="/finance/" class="flex items-center gap-4 px-4 py-3 rounded-xl text-[#434656] hover:bg-[#e2e7ff] transition-colors">
+            <span class="material-symbols-outlined">payments</span>
+            <span>Financial Tracking</span>
+        </a>
+        <a href="/paths/" class="flex items-center gap-4 px-4 py-3 rounded-xl text-[#434656] hover:bg-[#e2e7ff] transition-colors">
+            <span class="material-symbols-outlined">directions_walk</span>
+            <span>Your Path</span>
+        </a>
+        <a href="/reconciliation/" class="flex items-center gap-4 px-4 py-3 rounded-xl text-[#434656] hover:bg-[#e2e7ff] transition-colors">
+            <span class="material-symbols-outlined">sync_alt</span>
+            <span>Reconciliation</span>
+        </a>
+        <a href="/connections/" class="flex items-center gap-4 px-4 py-3 rounded-xl text-[#434656] hover:bg-[#e2e7ff] transition-colors">
+            <span class="material-symbols-outlined">link</span>
+            <span>Connections</span>
+        </a>
+        <a href="/settings/" class="flex items-center gap-4 px-4 py-3 rounded-xl text-[#434656] hover:bg-[#e2e7ff] transition-colors">
+            <span class="material-symbols-outlined">settings</span>
+            <span>Settings</span>
+        </a>
+    </nav>
+    <div class="px-6 pt-6 mt-auto border-t border-[#c3c5d9]/20">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-[#1e5af9] flex items-center justify-center text-white font-bold text-sm">
+                {{ user.username|first|upper }}
+            </div>
+            <div>
+                <p class="text-sm font-bold text-[#131b2e]">{{ user.username }}</p>
+                <p class="text-[10px] text-[#434656]">{{ user_profession|title|default:"Beginner" }}</p>
+            </div>
+        </div>
+        <div class="mt-4 p-3 bg-[#0043ce]/5 rounded-xl border border-[#0043ce]/10">
+            <div class="flex items-center justify-between text-xs">
+                <span class="text-[#0043ce] font-bold">Free uses left</span>
+                <span class="text-[#0043ce] font-bold">{{ trial_uses_remaining|default:"3" }}/3</span>
+            </div>
+            <div class="mt-2 h-1.5 bg-[#e2e7ff] rounded-full overflow-hidden">
+                <div class="h-full bg-[#0043ce] rounded-full" style="width: {{ trial_uses_percent|default:'100' }}%"></div>
+            </div>
+        </div>
+    </div>
+</aside>

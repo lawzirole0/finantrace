@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load connection_tags %}
+{% block title %}Platform Connections{% endblock %}
+{% block content %}
+<div class="flex justify-between items-end mb-8">
+    <div>
+        <h2 class="text-[32px] font-bold text-[#131b2e]">Platform Connections</h2>
+        <p class="text-lg text-[#434656] mt-2 max-w-2xl">Connect your daily platforms to pull data, track growth, and get smarter insights.</p>
+    </div>
+    <a href="/connections/connect/" class="flex items-center px-5 py-2.5 bg-[#0043ce] text-white rounded-xl text-sm shadow-md hover:bg-[#1e5af9] transition-colors">
+        <span class="material-symbols-outlined mr-2">add</span>Add Connection
+    </a>
+</div>
+
+{% if messages %}
+<div class="mb-6 space-y-2">
+    {% for message in messages %}
+    <div class="flex items-center gap-3 p-4 rounded-xl {% if message.tags == 'success' %}bg-[#006e2f]/10 text-[#006e2f] border border-[#006e2f]/20{% elif message.tags == 'error' %}bg-[#ba1a1a]/10 text-[#ba1a1a] border border-[#ba1a1a]/20{% else %}bg-[#e2e7ff] text-[#0043ce] border border-[#0043ce]/10{% endif %}">
+        <span class="material-symbols-outlined text-sm">{% if message.tags == 'success' %}check_circle{% elif message.tags == 'error' %}error{% else %}info{% endif %}</span>
+        <span class="text-sm font-medium">{{ message }}</span>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if connections %}
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+    {% for conn in connections %}
+    {% with info=platform_info|dict_key:conn.platform %}
+    <div class="bg-white rounded-2xl border border-[#c3c5d9]/30 shadow-sm hover:shadow-md transition-all overflow-hidden">
+        <div class="p-6">
+            <div class="flex items-start justify-between mb-4">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: {{ info.bg|default:'#f2f3ff' }}; color: {{ info.color|default:'#0043ce' }}">
+                        <span class="material-symbols-outlined">{{ info.icon|default:'link' }}</span>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-[#131b2e]">{{ conn.get_platform_display }}</h3>
+                        <p class="text-sm text-[#737687]">{{ conn.account_name|default:conn.account_email|default:"Connected" }}</p>
+                    </div>
+                </div>
+                <span class="w-3 h-3 rounded-full {% if conn.is_active %}bg-[#006e2f]{% else %}bg-[#ba1a1a]{% endif %} mt-1"></span>
+            </div>
+            <div class="space-y-2 text-sm text-[#434656]">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[16px] text-[#737687]">label</span>
+                    <span>{{ conn.label }}</span>
+                </div>
+                {% if conn.last_synced_at %}
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[16px] text-[#737687]">sync</span>
+                    <span>Last synced: {{ conn.last_synced_at|timesince }} ago</span>
+                </div>
+                {% endif %}
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[16px] text-[#737687]">calendar_today</span>
+                    <span>Connected {{ conn.created_at|date:"M j, Y" }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="px-6 py-4 bg-[#faf8ff] border-t border-[#c3c5d9]/20 flex items-center justify-between">
+            <a href="/connections/{{ conn.id }}/sync/" class="flex items-center gap-2 text-sm text-[#0043ce] font-bold hover:text-[#1e5af9] transition-colors">
+                <span class="material-symbols-outlined text-[18px]">sync</span>Sync Now
+            </a>
+            <a href="/connections/{{ conn.id }}/disconnect/" class="flex items-center gap-2 text-sm text-[#ba1a1a] font-bold hover:text-[#8a0000] transition-colors" onclick="return confirm('Disconnect {{ conn.get_platform_display }}? Data from this platform will no longer be imported.')">
+                <span class="material-symbols-outlined text-[18px]">link_off</span>Disconnect
+            </a>
+        </div>
+    </div>
+    {% endwith %}
+    {% endfor %}
+</div>
+{% else %}
+<div class="bg-white rounded-2xl border border-[#c3c5d9]/30 shadow-sm p-16 text-center">
+    <div class="w-20 h-20 bg-[#e2e7ff] rounded-3xl flex items-center justify-center text-[#0043ce] mx-auto mb-6">
+        <span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">link</span>
+    </div>
+    <h3 class="text-2xl font-bold text-[#131b2e] mb-3">No platforms connected yet</h3>
+    <p class="text-[#434656] max-w-md mx-auto mb-8">Connect your payment processors, social media accounts, or e-commerce platforms to bring all your business data into one place.</p>
+    <a href="/connections/connect/" class="inline-flex items-center px-8 py-4 bg-[#0043ce] text-white rounded-xl font-bold hover:bg-[#1e5af9] transition-all shadow-lg">
+        <span class="material-symbols-outlined mr-2">add</span>Connect Your First Platform
+    </a>
+</div>
+{% endif %}
+
+{% if connections %}
+<div class="mt-12 bg-[#e2e7ff]/30 border border-[#0043ce]/10 rounded-2xl p-8">
+    <div class="flex items-center gap-4 mb-4">
+        <div class="w-12 h-12 bg-[#0043ce]/10 rounded-xl flex items-center justify-center text-[#0043ce]">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">insights</span>
+        </div>
+        <div>
+            <h3 class="text-xl font-bold text-[#131b2e]">Connected Insights</h3>
+            <p class="text-sm text-[#434656]">With connected platforms, your dashboard automatically shows combined data.</p>
+        </div>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-white p-4 rounded-xl text-center">
+            <span class="text-2xl font-bold text-[#0043ce]">{{ connections|length }}</span>
+            <p class="text-xs text-[#737687] mt-1">Platforms Connected</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl text-center">
+            <span class="text-2xl font-bold text-[#0043ce]">{{ connections.count }}</span>
+            <p class="text-xs text-[#737687] mt-1">Active Integrations</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl text-center">
+            <span class="text-2xl font-bold text-[#006e2f]">Auto</span>
+            <p class="text-xs text-[#737687] mt-1">Data Syncing</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl text-center">
+            <span class="text-2xl font-bold text-[#435369]">24/7</span>
+            <p class="text-xs text-[#737687] mt-1">Real-time Updates</p>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

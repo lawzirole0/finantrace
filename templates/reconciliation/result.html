@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load currency_tags %}
+{% block title %}Trace Result - finanTrace{% endblock %}
+{% block content %}
+<div class="mb-8">
+    <h2 class="text-[32px] font-bold text-[#131b2e]">Trace Result</h2>
+</div>
+<div class="grid grid-cols-12 gap-6">
+    <div class="col-span-12 xl:col-span-7">
+        {% if balanced %}
+        <div class="bg-white border border-[#006e2f]/30 rounded-2xl p-8 shadow-sm">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-16 h-16 rounded-full bg-[#006e2f]/10 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[#006e2f] text-4xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-[#006e2f]">Balanced!</h3>
+                    <p class="text-[#434656]">Your books match. No discrepancies found.</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4 p-6 bg-[#f2f3ff] rounded-xl">
+                <div><p class="text-xs text-[#737687]">Opening</p><p class="text-lg font-bold">{{ currency_symbol }}{{ opening|floatformat:2 }}</p></div>
+                <div><p class="text-xs text-[#737687]">Deposits</p><p class="text-lg font-bold">{{ currency_symbol }}{{ deposits|floatformat:2 }}</p></div>
+                <div><p class="text-xs text-[#737687]">Withdrawals</p><p class="text-lg font-bold">{{ currency_symbol }}{{ withdrawals|floatformat:2 }}</p></div>
+                <div><p class="text-xs text-[#737687]">Closing</p><p class="text-lg font-bold">{{ currency_symbol }}{{ closing|floatformat:2 }}</p></div>
+            </div>
+            <div class="mt-6 p-4 bg-[#006e2f]/5 rounded-xl border border-[#006e2f]/10">
+                <p class="text-sm text-[#006e2f] font-bold">✓ Expected ({{ currency_symbol }}{{ expected_closing|floatformat:2 }}) = Entered ({{ currency_symbol }}{{ closing|floatformat:2 }}) — Difference: {{ currency_symbol }}0.00</p>
+            </div>
+        </div>
+        {% else %}
+        <div class="bg-white border border-[#ba1a1a]/20 rounded-2xl p-8 shadow-sm">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-16 h-16 rounded-full bg-[#ffdad6] flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[#ba1a1a] text-4xl" style="font-variation-settings: 'FILL' 1;">gpp_maybe</span>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-[#ba1a1a]">Discrepancy Found</h3>
+                    <p class="text-[#434656]">Your numbers don't match. Let's trace the issue.</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4 p-6 bg-[#f2f3ff] rounded-xl">
+                <div><p class="text-xs text-[#737687]">You entered</p><p class="text-lg font-bold text-[#ba1a1a]">{{ currency_symbol }}{{ closing|floatformat:2 }}</p></div>
+                <div><p class="text-xs text-[#737687]">Expected</p><p class="text-lg font-bold text-[#006e2f]">{{ currency_symbol }}{{ expected_closing|floatformat:2 }}</p></div>
+                <div><p class="text-xs text-[#737687]">Difference</p><p class="text-2xl font-bold text-[#ba1a1a]">{{ currency_symbol }}{{ difference|floatformat:2 }}</p></div>
+                <div><p class="text-xs text-[#737687]">Formula</p><p class="text-sm font-bold">{{ currency_symbol }}{{ opening|floatformat:2 }} + {{ currency_symbol }}{{ deposits|floatformat:2 }} - {{ currency_symbol }}{{ withdrawals|floatformat:2 }} = {{ currency_symbol }}{{ expected_closing|floatformat:2 }}</p></div>
+            </div>
+            <div class="mt-6 space-y-4">
+                <h4 class="font-bold">Likely causes:</h4>
+                {% for s in suggestions %}
+                <div class="p-4 bg-[#ffdad6]/30 rounded-xl border border-[#ba1a1a]/10 flex items-start gap-3">
+                    <span class="material-symbols-outlined text-[#ba1a1a]">{{ s.icon }}</span>
+                    <div><p class="text-sm font-bold">{{ s.title }}</p><p class="text-xs text-[#737687]">{{ s.description }}</p></div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="mt-6 flex gap-3">
+                <a href="/reconciliation/" class="flex-1 py-3 bg-[#0043ce] text-white rounded-xl font-bold text-center hover:bg-[#1e5af9] transition-all">Try Again</a>
+                <a href="/reconciliation/" class="flex-1 py-3 border border-[#c3c5d9] text-[#131b2e] rounded-xl font-bold text-center hover:bg-[#f2f3ff] transition-all">Flag for Review</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-span-12 xl:col-span-5">
+        <div class="bg-[#d3e4fe] rounded-2xl p-6 border border-[#0043ce]/10">
+            <div class="flex items-center gap-2 mb-4">
+                <span class="material-symbols-outlined text-[#435369]">tips_and_updates</span>
+                <span class="text-xs font-bold text-[#435369] uppercase tracking-wider">AI Insight</span>
+            </div>
+            <p class="text-sm text-[#38485d] leading-relaxed">Based on your recent patterns, most discrepancies happen on Mondays — likely due to weekend transactions being entered late. Consider checking Friday's closing vs Monday's opening.</p>
+        </div>
+        <div class="mt-6 bg-white border border-[#c3c5d9]/30 rounded-2xl p-6">
+            <h4 class="font-bold mb-4">Recent Checks</h4>
+            <div class="space-y-3">
+                {% for r in recent_reports %}
+                <div class="flex items-center justify-between p-3 {% if r.is_balanced %}bg-[#f2f3ff]{% else %}bg-[#ffdad6]/30{% endif %} rounded-xl">
+                    <div><p class="text-sm font-bold">{{ r.created_at|date:"M d" }}</p><p class="text-xs text-[#737687]">Closing: {{ currency_symbol }}{{ r.closing_balance|floatformat:2 }}</p></div>
+                    <span class="{% if r.is_balanced %}text-[#006e2f] bg-[#006e2f]/10{% else %}text-[#ba1a1a] bg-[#ffdad6]{% endif %} text-xs font-bold px-2 py-1 rounded-full">{% if r.is_balanced %}✓ Balanced{% else %}⚠ Error{% endif %}</span>
+                </div>
+                {% empty %}
+                <p class="text-sm text-[#737687]">No previous checks yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

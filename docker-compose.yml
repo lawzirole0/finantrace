@@ -1,0 +1,34 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file: .env
+    environment:
+      - USE_SQLITE=False
+      - DB_NAME=finantrace
+      - DB_USER=finantrace
+      - DB_PASSWORD=finantrace
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DEBUG=False
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16-alpine
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=finantrace
+      - POSTGRES_USER=finantrace
+      - POSTGRES_PASSWORD=finantrace
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U finantrace"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:

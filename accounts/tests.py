@@ -34,7 +34,6 @@ class UserProfileModelTest(TestCase):
 class SignUpFormTest(TestCase):
     def test_valid_form(self):
         data = {
-            'username': 'newuser',
             'email': 'new@example.com',
             'profession': 'creator',
             'currency': 'EUR',
@@ -46,7 +45,6 @@ class SignUpFormTest(TestCase):
 
     def test_invalid_form_mismatched_passwords(self):
         data = {
-            'username': 'newuser',
             'email': 'new@example.com',
             'profession': 'creator',
             'currency': 'EUR',
@@ -58,7 +56,6 @@ class SignUpFormTest(TestCase):
 
     def test_form_saves_profile_currency(self):
         data = {
-            'username': 'currencyuser',
             'email': 'cu@example.com',
             'profession': 'retail',
             'currency': 'GBP',
@@ -99,7 +96,6 @@ class LoginSignupViewsTest(TestCase):
 
     def test_signup_post_success(self):
         data = {
-            'username': 'freshuser',
             'email': 'fresh@example.com',
             'profession': 'freelancer',
             'currency': 'USD',
@@ -108,7 +104,7 @@ class LoginSignupViewsTest(TestCase):
         }
         response = self.client.post(reverse('signup'), data)
         self.assertRedirects(response, reverse('dashboard'))
-        self.assertTrue(User.objects.filter(username='freshuser').exists())
+        self.assertTrue(User.objects.filter(email='fresh@example.com').exists())
 
     def test_logout(self):
         self.client.login(username='testuser', password='pass123')

@@ -13,7 +13,7 @@ def profile_context(request):
                 'currency_code': currency_code,
                 'currency_symbol': CURRENCY_SYMBOLS.get(currency_code, '₦'),
             }
-        except:
+        except Exception:
             pass
     return {
         'currency_code': 'NGN',

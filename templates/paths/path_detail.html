@@ -13,7 +13,7 @@
 </div>
 <div class="space-y-8">
     {% for step in steps %}
-    <div class="bg-white border {% if forloop.first and step.items.all.0.id in user_progress and user_progress|dictsort:step.items.all.0.id %}border-[#c3c5d9]/30 opacity-60{% elif forloop.counter == 2 %}border-2 border-[#0043ce] shadow-lg relative overflow-hidden{% else %}border border-dashed border-[#c3c5d9]/50 opacity-50{% endif %} rounded-2xl p-6">
+    <div class="bg-white border {% if forloop.first and step.items.all.0.id in user_progress %}border-[#c3c5d9]/30 opacity-60{% elif forloop.counter == 2 %}border-2 border-[#0043ce] shadow-lg relative overflow-hidden{% else %}border border-dashed border-[#c3c5d9]/50 opacity-50{% endif %} rounded-2xl p-6">
         {% if forloop.counter == 2 %}
         <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#0043ce]/5 rounded-full blur-3xl"></div>
         {% endif %}
@@ -28,8 +28,8 @@
         </div>
         <div class="space-y-3 ml-12 relative">
             {% for item in step.items.all %}
-            <div class="flex items-center gap-3 p-3 {% if item.id in user_progress and user_progress|dictsort:item.id %}bg-[#f2f3ff]{% elif forloop.counter == 2 and forloop.parentloop.counter == 2 %}bg-[#0043ce]/5 border border-[#0043ce]/40{% else %}bg-white border border-[#c3c5d9]/20{% endif %} rounded-xl">
-                {% if item.id in user_progress and user_progress|dictsort:item.id %}
+            <div class="flex items-center gap-3 p-3 {% if item.id in user_progress %}bg-[#f2f3ff]{% elif forloop.counter == 2 and forloop.parentloop.counter == 2 %}bg-[#0043ce]/5 border border-[#0043ce]/40{% else %}bg-white border border-[#c3c5d9]/20{% endif %} rounded-xl">
+                {% if item.id in user_progress %}
                 <span class="material-symbols-outlined text-[#006e2f]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
                 {% elif forloop.counter == 2 and forloop.parentloop.counter == 2 %}
                 <span class="w-6 h-6 rounded-full border-2 border-[#0043ce] flex items-center justify-center"><span class="w-2 h-2 bg-[#0043ce] rounded-full animate-ping"></span></span>

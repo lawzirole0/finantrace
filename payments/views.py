@@ -1,10 +1,14 @@
 import json
+import hashlib
+import hmac
+from datetime import timedelta
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
+from django.utils import timezone
 from .models import Subscription
 from .services import paystack as pstk
 
@@ -56,16 +60,18 @@ def callback_view(request):
         messages.error(request, f'Payment verification failed: {result.get("message", "Unknown error")}')
         return redirect('dashboard')
 
-    data = result['data']
-    if data['status'] != 'success':
+    data = result.get('data')
+    if not data or data.get('status') != 'success':
         messages.error(request, 'Payment was not successful.')
         return redirect('payments_pricing')
 
+    customer = data.get('customer') or {}
+    authorization = data.get('authorization') or {}
     metadata = data.get('metadata') or {}
     plan = metadata.get('plan') or 'startup'
-    customer_code = data['customer']['customer_code']
-    auth_code = data['authorization']['authorization_code']
-    email = data['customer']['email']
+    customer_code = customer.get('customer_code', '')
+    auth_code = authorization.get('authorization_code', '')
+    email = customer.get('email', request.user.email)
 
     sub, _ = Subscription.objects.get_or_create(user=request.user)
     sub.plan = plan
@@ -79,9 +85,6 @@ def callback_view(request):
         sub_result = pstk.create_subscription(customer_code, plan_code)
         if sub_result.get('status'):
             sub.paystack_subscription_code = sub_result['data']['subscription_code']
-
-            from django.utils import timezone
-            from datetime import timedelta
             sub.renews_at = timezone.now() + timedelta(days=30)
             sub.save(update_fields=['paystack_subscription_code', 'renews_at'])
 
@@ -102,18 +105,19 @@ def webhook_view(request):
     signature = request.headers.get('x-paystack-signature', '')
     body = request.body
 
-    import hashlib
-    import hmac
     expected = hmac.new(
         settings.PAYSTACK_SECRET_KEY.encode(),
         body,
         hashlib.sha512,
     ).hexdigest()
 
-    if signature != expected:
+    if not hmac.compare_digest(signature, expected):
         return HttpResponse(status=401)
 
-    event = json.loads(body)
+    try:
+        event = json.loads(body)
+    except json.JSONDecodeError:
+        return HttpResponse(status=400)
 
     if event['event'] == 'subscription.create':
         data = event['data']
@@ -124,8 +128,6 @@ def webhook_view(request):
         for sub in Subscription.objects.filter(paystack_customer_code=customer_code):
             sub.paystack_subscription_code = sub_code
             sub.is_active = True
-            from django.utils import timezone
-            from datetime import timedelta
             sub.renews_at = timezone.now() + timedelta(days=30)
             sub.save(update_fields=['paystack_subscription_code', 'is_active', 'renews_at'])
 

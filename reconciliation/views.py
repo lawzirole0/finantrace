@@ -16,10 +16,14 @@ def new_report_view(request):
 def trace_result_view(request):
     profile = request.user.profile
     if request.method == 'POST':
-        opening = float(request.POST.get('opening', 0))
-        deposits = float(request.POST.get('deposits', 0))
-        withdrawals = float(request.POST.get('withdrawals', 0))
-        closing = float(request.POST.get('closing', 0))
+        try:
+            opening = float(request.POST.get('opening', 0))
+            deposits = float(request.POST.get('deposits', 0))
+            withdrawals = float(request.POST.get('withdrawals', 0))
+            closing = float(request.POST.get('closing', 0))
+        except (ValueError, TypeError):
+            messages.error(request, 'Please enter valid numeric values.')
+            return redirect('new_report')
 
         result = TraceResult(opening, deposits, withdrawals, closing)
 

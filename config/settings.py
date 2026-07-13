@@ -84,6 +84,11 @@ if config('USE_SQLITE', default=True, cast=bool):
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 
+AUTHENTICATION_BACKENDS = [
+    'accounts.backends.EmailAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
 ]

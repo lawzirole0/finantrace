@@ -76,7 +76,7 @@ class SignUpFormTest(TestCase):
 class LoginSignupViewsTest(TestCase):
     def setUp(self):
         self.client = Client()
-        self.user = User.objects.create_user(username="testuser", password="pass123")
+        self.user = User.objects.create_user(username="testuser", email="test@example.com", password="pass123")
 
     def test_login_get(self):
         response = self.client.get(reverse('login'))
@@ -84,13 +84,13 @@ class LoginSignupViewsTest(TestCase):
         self.assertTemplateUsed(response, 'accounts/login.html')
 
     def test_login_post_success(self):
-        response = self.client.post(reverse('login'), {'username': 'testuser', 'password': 'pass123'})
+        response = self.client.post(reverse('login'), {'email': 'test@example.com', 'password': 'pass123'})
         self.assertRedirects(response, reverse('dashboard'))
 
     def test_login_post_failure(self):
-        response = self.client.post(reverse('login'), {'username': 'testuser', 'password': 'wrong'})
+        response = self.client.post(reverse('login'), {'email': 'test@example.com', 'password': 'wrong'})
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Invalid username or password.')
+        self.assertContains(response, 'Invalid email or password.')
 
     def test_signup_get(self):
         response = self.client.get(reverse('signup'))

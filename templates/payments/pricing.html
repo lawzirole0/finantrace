@@ -48,7 +48,7 @@
                     </div>
                     <h3 class="text-xl font-bold mb-1">Startup</h3>
                     <p class="text-sm text-[#737687] mb-4">For serious founders</p>
-                    <p class="text-4xl font-bold mb-2">{{ currency_symbol }}5<span class="text-lg text-[#737687]">/mo</span></p>
+                    <p class="text-4xl font-bold mb-2">{{ currency_symbol }}7,500<span class="text-lg text-[#737687]">/mo</span></p>
                     <p class="text-xs text-[#737687] mb-6">billed monthly &middot; cancel anytime</p>
                     <ul class="space-y-4 mb-8 flex-1">
                         <p class="text-xs font-bold text-[#737687] uppercase tracking-wider mb-3">Business Research</p>
@@ -71,17 +71,17 @@
                     <form method="POST" action="{% url 'subscribe' %}">
                         {% csrf_token %}
                         <input type="hidden" name="plan" value="startup">
-                        <button type="submit" class="w-full py-3 bg-[#0043ce] text-white text-center rounded-xl font-bold hover:bg-[#1e5af9] transition-all shadow-md">Subscribe {{ currency_symbol }}5/mo</button>
+                        <button type="submit" class="w-full py-3 bg-[#0043ce] text-white text-center rounded-xl font-bold hover:bg-[#1e5af9] transition-all shadow-md">Subscribe {{ currency_symbol }}7,500/mo</button>
                     </form>
                     {% else %}
-                    <a href="/accounts/signup/" class="block w-full py-3 bg-[#0043ce] text-white text-center rounded-xl font-bold hover:bg-[#1e5af9] transition-all shadow-md">Subscribe {{ currency_symbol }}5/mo</a>
+                    <a href="/accounts/signup/" class="block w-full py-3 bg-[#0043ce] text-white text-center rounded-xl font-bold hover:bg-[#1e5af9] transition-all shadow-md">Subscribe {{ currency_symbol }}7,500/mo</a>
                     {% endif %}
                     <p class="text-center text-xs text-[#006e2f] font-bold mt-3">&#9733; 7-day free trial included</p>
                 </div>
                 <div class="bg-white rounded-2xl p-8 border border-[#c3c5d9]/30 text-left relative flex flex-col">
                     <h3 class="text-xl font-bold mb-1">Growing</h3>
                     <p class="text-sm text-[#737687] mb-4">For scaling businesses</p>
-                    <p class="text-4xl font-bold mb-2">{{ currency_symbol }}10<span class="text-lg text-[#737687]">/mo</span></p>
+                    <p class="text-4xl font-bold mb-2">{{ currency_symbol }}15,000<span class="text-lg text-[#737687]">/mo</span></p>
                     <p class="text-xs text-[#737687] mb-6">billed monthly &middot; cancel anytime</p>
                     <ul class="space-y-4 mb-8 flex-1">
                         <p class="text-xs font-bold text-[#737687] uppercase tracking-wider mb-3">Business Research</p>
@@ -102,10 +102,10 @@
                     <form method="POST" action="{% url 'subscribe' %}">
                         {% csrf_token %}
                         <input type="hidden" name="plan" value="growing">
-                        <button type="submit" class="w-full py-3 bg-[#131b2e] text-white text-center rounded-xl font-bold hover:bg-[#434656] transition-all shadow-md">Subscribe {{ currency_symbol }}10/mo</button>
+                        <button type="submit" class="w-full py-3 bg-[#131b2e] text-white text-center rounded-xl font-bold hover:bg-[#434656] transition-all shadow-md">Subscribe {{ currency_symbol }}15,000/mo</button>
                     </form>
                     {% else %}
-                    <a href="/accounts/signup/" class="block w-full py-3 bg-[#131b2e] text-white text-center rounded-xl font-bold hover:bg-[#434656] transition-all shadow-md">Subscribe {{ currency_symbol }}10/mo</a>
+                    <a href="/accounts/signup/" class="block w-full py-3 bg-[#131b2e] text-white text-center rounded-xl font-bold hover:bg-[#434656] transition-all shadow-md">Subscribe {{ currency_symbol }}15,000/mo</a>
                     {% endif %}
                 </div>
             </div>

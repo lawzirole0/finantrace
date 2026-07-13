@@ -11,8 +11,8 @@ PLAN_CODES = {
 }
 
 PLAN_AMOUNTS = {
-    "startup": 500_00,
-    "growing": 1000_00,
+    "startup": 7500_00,
+    "growing": 15000_00,
 }
 
 

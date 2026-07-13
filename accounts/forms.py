@@ -6,7 +6,7 @@ from .models import UserProfile, CURRENCY_CHOICES
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(required=True)
     profession = forms.ChoiceField(choices=UserProfile.PROFESSION_CHOICES)
-    currency = forms.ChoiceField(choices=CURRENCY_CHOICES, initial='USD')
+    currency = forms.ChoiceField(choices=CURRENCY_CHOICES, initial='NGN')
 
     class Meta:
         model = User

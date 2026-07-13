@@ -119,13 +119,12 @@ class ContextProcessorTest(TestCase):
 
     def test_anonymous_user(self):
         result = profile_context(type('req', (), {'user': type('u', (), {'is_authenticated': False})()})())
-        self.assertEqual(result['currency_code'], 'USD')
-        self.assertEqual(result['currency_symbol'], '$')
+        self.assertEqual(result['currency_code'], 'NGN')
+        self.assertEqual(result['currency_symbol'], '₦')
 
     def test_authenticated_user(self):
         self.client.login(username='testuser', password='pass123')
         request = type('req', (), {'user': self.user, 'method': 'GET'})()
-        # Simulate middleware attaching user
         result = profile_context(request)
         self.assertEqual(result['currency_code'], 'USD')
 

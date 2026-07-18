@@ -6,112 +6,94 @@
     <div class="flex items-end justify-between">
         <div>
             <h2 class="text-[48px] font-bold text-[#131b2e] tracking-tight">Good morning, {{ user.username }}.</h2>
-            <p class="text-lg text-[#434656] mt-2 max-w-xl">Your business health is looking strong today. You have <span class="text-[#0043ce] font-bold">4 pending tasks</span>.</p>
+            {% if total_reports > 0 %}
+            <p class="text-lg text-[#434656] mt-2 max-w-xl">You have <span class="text-[#0043ce] font-bold">{{ total_reports }} report{{ total_reports|pluralize }}</span> recorded. <span class="text-[#006e2f] font-bold">{{ balanced_count }}</span> balanced.</p>
+            {% else %}
+            <p class="text-lg text-[#434656] mt-2 max-w-xl">Ready to take control of your finances? <a href="{% url 'new_report' %}" class="text-[#0043ce] font-bold hover:underline">Start your first reconciliation</a>.</p>
+            {% endif %}
         </div>
         <div class="hidden lg:block text-right">
             <p class="text-xs text-[#737687] uppercase tracking-widest">Business Health</p>
             <div class="flex items-center gap-2 mt-1">
-                <span class="text-2xl font-bold text-[#006e2f]">82%</span>
-                <span class="material-symbols-outlined text-[#006e2f]" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+                {% if total_reports > 0 %}
+                <span class="text-2xl font-bold {% if health_pct >= 70 %}text-[#006e2f]{% elif health_pct >= 40 %}text-[#ba5a00]{% else %}text-[#ba1a1a]{% endif %}">{{ health_pct }}%</span>
+                <span class="material-symbols-outlined {% if health_pct >= 70 %}text-[#006e2f]{% else %}text-[#ba5a00]{% endif %}" style="font-variation-settings: 'FILL' 1;">{{ health_icon }}</span>
+                {% else %}
+                <span class="text-2xl font-bold text-[#737687]">--</span>
+                {% endif %}
             </div>
         </div>
     </div>
 </section>
 <div class="grid grid-cols-12 gap-6">
     <div class="col-span-12 lg:col-span-8 bg-white border border-[#c3c5d9]/30 rounded-xl p-6 shadow-sm">
+        {% if transactions %}
         <div class="flex items-center justify-between mb-8">
             <div>
                 <h3 class="text-xl font-bold">Cash Flow Overview</h3>
-                <p class="text-xs text-[#737687]">Real-time performance vs last month</p>
-            </div>
-            <select class="bg-[#f2f3ff] border-none rounded-lg text-sm text-[#131b2e] px-4 py-2 focus:ring-2 focus:ring-[#0043ce]/20">
-                <option>Last 30 Days</option>
-                <option>This Quarter</option>
-            </select>
-        </div>
-        <div class="grid grid-cols-3 gap-6 mb-8">
-            <div class="p-6 bg-[#f2f3ff] rounded-xl">
-                <p class="text-xs text-[#737687] uppercase tracking-wide mb-2">Total Inflow</p>
-                <div class="flex items-center gap-2">
-                    <h4 class="text-2xl font-bold">{{ currency_symbol }}142,850</h4>
-                    <span class="text-[#006e2f] text-xs font-bold">+12%</span>
-                </div>
-            </div>
-            <div class="p-6 bg-[#f2f3ff] rounded-xl">
-                <p class="text-xs text-[#737687] uppercase tracking-wide mb-2">Total Outflow</p>
-                <div class="flex items-center gap-2">
-                    <h4 class="text-2xl font-bold">{{ currency_symbol }}84,200</h4>
-                    <span class="text-[#ba1a1a] text-xs font-bold">+5%</span>
-                </div>
-            </div>
-            <div class="p-6 bg-[#0043ce]/5 border border-[#0043ce]/10 rounded-xl">
-                <p class="text-xs text-[#0043ce] uppercase tracking-wide mb-2">Net Profit</p>
-                <div class="flex items-center gap-2">
-                    <h4 class="text-2xl font-bold text-[#0043ce]">{{ currency_symbol }}58,650</h4>
-                    <span class="bg-[#006e2f] text-white text-[10px] px-2 py-0.5 rounded-full font-bold">HEALTHY</span>
-                </div>
+                <p class="text-xs text-[#737687]">Your recent transactions</p>
             </div>
         </div>
-        <div class="w-full h-48 bg-[#f2f3ff] rounded-xl flex items-end justify-between px-8 py-4">
-            <div class="w-8 h-[40%] bg-[#0043ce] rounded-t-lg"></div>
-            <div class="w-8 h-[60%] bg-[#0043ce] rounded-t-lg"></div>
-            <div class="w-8 h-[55%] bg-[#0043ce] rounded-t-lg"></div>
-            <div class="w-8 h-[80%] bg-[#0043ce] rounded-t-lg"></div>
-            <div class="w-8 h-[70%] bg-[#0043ce] rounded-t-lg"></div>
-            <div class="w-8 h-[90%] bg-[#1e5af9] rounded-t-lg"></div>
-            <div class="w-8 h-[85%] bg-[#0043ce] rounded-t-lg"></div>
-            <div class="w-8 h-[100%] bg-[#1e5af9] rounded-t-lg"></div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="border-b border-[#c3c5d9]/10"><th class="pb-3 text-xs text-[#737687] uppercase tracking-wider">Date</th><th class="pb-3 text-xs text-[#737687] uppercase tracking-wider">Description</th><th class="pb-3 text-xs text-[#737687] uppercase tracking-wider">Amount</th><th class="pb-3 text-xs text-[#737687] uppercase tracking-wider">Category</th></tr>
+                </thead>
+                <tbody class="divide-y divide-[#c3c5d9]/10">
+                    {% for t in transactions %}
+                    <tr class="hover:bg-[#f2f3ff]/50"><td class="py-3 text-sm text-[#737687]">{{ t.date|date:"M d" }}</td><td class="py-3 text-sm font-bold">{{ t.description|truncatechars:30 }}</td><td class="py-3 text-sm font-bold {% if t.amount >= 0 %}text-[#006e2f]{% else %}text-[#ba1a1a]{% endif %}">{{ currency_symbol }}{{ t.amount|floatformat:0 }}</td><td class="py-3 text-sm text-[#737687]">{{ t.category }}</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
+        {% else %}
+        <div class="flex flex-col items-center justify-center py-16 text-center">
+            <div class="w-16 h-16 bg-[#f2f3ff] rounded-2xl flex items-center justify-center text-[#0043ce] mb-6"><span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">account_balance</span></div>
+            <h3 class="text-xl font-bold mb-2">No transactions yet</h3>
+            <p class="text-sm text-[#434656] max-w-md">Track your income and expenses to see your cash flow at a glance.</p>
+            <a href="{% url 'finance_overview' %}" class="mt-6 px-6 py-3 bg-[#0043ce] text-white rounded-xl font-bold hover:bg-[#1e5af9] transition-all shadow-md">Add Your First Transaction</a>
+        </div>
+        {% endif %}
     </div>
     <div class="col-span-12 lg:col-span-4 bg-white border border-[#c3c5d9]/30 rounded-xl p-6 shadow-sm flex flex-col items-center text-center">
         <h3 class="text-xl font-bold mb-6 self-start">Business Health</h3>
+        {% if total_reports > 0 %}
         <div class="relative w-48 h-48 flex items-center justify-center mb-6">
-            <svg class="w-full h-full -rotate-90"><circle class="text-[#e2e7ff]" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-width="12"></circle><circle class="text-[#0043ce]" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-dasharray="552.92" stroke-dashoffset="110" stroke-linecap="round" stroke-width="12"></circle></svg>
+            <svg class="w-full h-full -rotate-90"><circle class="text-[#e2e7ff]" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-width="12"></circle><circle class="text-[{% if health_pct >= 70 %}#0043ce{% elif health_pct >= 40 %}#ba5a00{% else %}#ba1a1a{% endif %}]" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-dasharray="552.92" stroke-dashoffset="{{ health_offset }}" stroke-linecap="round" stroke-width="12"></circle></svg>
             <div class="absolute flex flex-col items-center">
-                <span class="text-4xl font-bold text-[#131b2e]">82%</span>
-                <span class="text-xs text-[#737687]">OPTIMIZED</span>
+                <span class="text-4xl font-bold text-[#131b2e]">{{ health_pct }}%</span>
+                <span class="text-xs text-[#737687]">{{ health_label }}</span>
             </div>
         </div>
-        <p class="text-sm text-[#434656]">Your runway extended by <span class="font-bold text-[#006e2f]">3 months</span> since last reconciliation.</p>
-        <a href="/reconciliation/" class="mt-8 w-full py-3 rounded-xl bg-[#f2f3ff] text-[#0043ce] font-bold hover:bg-[#e2e7ff] text-center block">Check Today's Report</a>
+        <p class="text-sm text-[#434656]">{{ balanced_count }} of {{ total_reports }} reports balanced.</p>
+        {% else %}
+        <div class="w-48 h-48 flex items-center justify-center mb-6"><span class="text-6xl text-[#c3c5d9]">--</span></div>
+        <p class="text-sm text-[#434656]">No reports yet. <a href="{% url 'new_report' %}" class="text-[#0043ce] font-bold hover:underline">Run your first check</a>.</p>
+        {% endif %}
+        <a href="{% url 'new_report' %}" class="mt-8 w-full py-3 rounded-xl bg-[#f2f3ff] text-[#0043ce] font-bold hover:bg-[#e2e7ff] text-center block">New Reconciliation</a>
     </div>
     <div class="col-span-12 md:col-span-6 lg:col-span-5 bg-white border border-[#c3c5d9]/30 rounded-xl p-6 shadow-sm">
         <div class="flex items-center justify-between mb-6">
-            <h3 class="text-xl font-bold">Pending Tasks</h3>
-            <span class="bg-[#ffdad6] text-[#93000a] text-[10px] font-bold px-2 py-1 rounded">4 ACTION ITEMS</span>
+            <h3 class="text-xl font-bold">Recent Reports</h3>
+            {% if total_reports > 0 %}
+            <span class="bg-[#f2f3ff] text-[#131b2e] text-[10px] font-bold px-2 py-1 rounded">{{ total_reports }} TOTAL</span>
+            {% endif %}
         </div>
-        <div class="space-y-4">
-            <div class="flex items-start gap-4 p-4 rounded-xl border border-[#c3c5d9]/20 hover:bg-[#f2f3ff] cursor-pointer">
-                <div class="w-10 h-10 rounded-lg bg-[#0043ce]/10 text-[#0043ce] flex items-center justify-center">
-                    <span class="material-symbols-outlined">receipt_long</span>
+        {% if reports %}
+        <div class="space-y-3">
+            {% for r in reports %}
+            <div class="flex items-center justify-between p-4 rounded-xl border {% if r.is_balanced %}border-[#c3c5d9]/20{% else %}border-[#ffdad6]/50 bg-[#ffdad6]/5{% endif %}">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined {% if r.is_balanced %}text-[#006e2f]{% else %}text-[#ba1a1a]{% endif %}" style="font-variation-settings: 'FILL' 1;">{% if r.is_balanced %}check_circle{% else %}warning{% endif %}</span>
+                    <div><p class="text-sm font-bold">{{ r.created_at|date:"M d, Y" }}</p><p class="text-xs text-[#737687]">Balanced: {{ currency_symbol }}{{ r.closing_balance|floatformat:0 }}</p></div>
                 </div>
-                <div class="flex-1">
-                    <p class="text-sm font-bold">Reconcile 12 transactions</p>
-                    <p class="text-xs text-[#737687]">Due in 2 days</p>
-                </div>
-                <span class="material-symbols-outlined text-[#c3c5d9]">chevron_right</span>
+                <span class="text-xs font-bold px-2 py-1 rounded-full {% if r.is_balanced %}bg-[#006e2f]/10 text-[#006e2f]{% else %}bg-[#ffdad6] text-[#93000a]{% endif %}">{% if r.is_balanced %}OK{% else %}ERROR{% endif %}</span>
             </div>
-            <div class="flex items-start gap-4 p-4 rounded-xl border border-[#c3c5d9]/20 hover:bg-[#f2f3ff] cursor-pointer">
-                <div class="w-10 h-10 rounded-lg bg-[#435369]/10 text-[#435369] flex items-center justify-center">
-                    <span class="material-symbols-outlined">upload_file</span>
-                </div>
-                <div class="flex-1">
-                    <p class="text-sm font-bold">Submit daily report</p>
-                    <p class="text-xs text-[#737687]">Today's closing not yet entered</p>
-                </div>
-                <span class="material-symbols-outlined text-[#c3c5d9]">chevron_right</span>
-            </div>
-            <div class="flex items-start gap-4 p-4 rounded-xl border border-[#c3c5d9]/20 hover:bg-[#f2f3ff] cursor-pointer opacity-50">
-                <div class="w-10 h-10 rounded-lg bg-[#006e2f]/10 text-[#006e2f] flex items-center justify-center">
-                    <span class="material-symbols-outlined">check_circle</span>
-                </div>
-                <div class="flex-1">
-                    <p class="text-sm font-bold line-through">Weekly review completed</p>
-                    <p class="text-xs text-[#737687]">Done yesterday</p>
-                </div>
-                <span class="material-symbols-outlined text-[#737687]">done</span>
-            </div>
+            {% endfor %}
         </div>
+        {% else %}
+        <div class="text-center py-10"><p class="text-sm text-[#737687]">No reports yet.</p></div>
+        {% endif %}
     </div>
     <div class="col-span-12 md:col-span-6 lg:col-span-7 bg-white border border-[#c3c5d9]/30 rounded-xl p-6 shadow-sm relative overflow-hidden">
         <div class="absolute top-0 right-0 w-64 h-64 bg-[#0043ce]/5 rounded-full -mr-20 -mt-20 blur-3xl"></div>
@@ -120,35 +102,35 @@
                 <h3 class="text-xl font-bold">Your Path Progress</h3>
                 <p class="text-xs text-[#737687]">Current Stage: {{ profession_data.name|default:"Getting Started" }}</p>
             </div>
-            <a href="/paths/" class="text-[#0043ce] font-bold text-sm hover:underline">Full Path</a>
+            <a href="{% url 'paths_home' %}" class="text-[#0043ce] font-bold text-sm hover:underline">Full Path</a>
         </div>
         <div class="flex items-center gap-4 relative mb-8">
             <div class="flex-1 flex items-center">
-                <div class="w-8 h-8 rounded-full bg-[#006e2f] text-white flex items-center justify-center text-sm font-bold">1</div>
-                <div class="h-1 flex-1 bg-[#006e2f] mx-1"></div>
+                <div class="w-8 h-8 rounded-full {% if path_progress >= 25 %}bg-[#006e2f]{% else %}bg-[#e2e7ff] text-[#737687]{% endif %} text-white flex items-center justify-center text-sm font-bold">1</div>
+                <div class="h-1 flex-1 {% if path_progress >= 25 %}bg-[#006e2f]{% else %}bg-[#e2e7ff]{% endif %} mx-1"></div>
             </div>
             <div class="flex-1 flex items-center">
-                <div class="w-8 h-8 rounded-full bg-[#0043ce] text-white flex items-center justify-center text-sm font-bold ring-4 ring-[#0043ce]/20">2</div>
-                <div class="h-1 flex-1 bg-[#e2e7ff] mx-1"></div>
+                <div class="w-8 h-8 rounded-full {% if path_progress >= 50 %}bg-[#006e2f]{% elif path_progress >= 25 %}bg-[#0043ce] text-white ring-4 ring-[#0043ce]/20{% else %}bg-[#e2e7ff] text-[#737687]{% endif %} flex items-center justify-center text-sm font-bold">2</div>
+                <div class="h-1 flex-1 {% if path_progress >= 50 %}bg-[#006e2f]{% elif path_progress >= 25 %}bg-[#e2e7ff]{% else %}bg-[#e2e7ff]{% endif %} mx-1"></div>
             </div>
             <div class="flex-1 flex items-center">
-                <div class="w-8 h-8 rounded-full bg-[#e2e7ff] text-[#737687] flex items-center justify-center text-sm font-bold">3</div>
-                <div class="h-1 flex-1 bg-[#e2e7ff] mx-1"></div>
+                <div class="w-8 h-8 rounded-full {% if path_progress >= 75 %}bg-[#006e2f]{% else %}bg-[#e2e7ff] text-[#737687]{% endif %} flex items-center justify-center text-sm font-bold">3</div>
+                <div class="h-1 flex-1 {% if path_progress >= 75 %}bg-[#006e2f]{% else %}bg-[#e2e7ff]{% endif %} mx-1"></div>
             </div>
-            <div class="w-8 h-8 rounded-full bg-[#e2e7ff] text-[#737687] flex items-center justify-center text-sm font-bold">4</div>
+            <div class="w-8 h-8 rounded-full {% if path_progress >= 100 %}bg-[#006e2f]{% else %}bg-[#e2e7ff] text-[#737687]{% endif %} flex items-center justify-center text-sm font-bold">4</div>
         </div>
         <div class="bg-[#f2f3ff] rounded-xl p-6 relative">
             <div class="flex items-start gap-4">
                 <div class="flex-1">
-                    <h4 class="font-bold">Setup Your Foundation</h4>
-                    <p class="text-sm text-[#434656] mt-1">5 tasks remaining in this phase.</p>
+                    <h4 class="font-bold">{{ profession_data.name|default:"Your Journey" }}</h4>
+                    <p class="text-sm text-[#434656] mt-1">{{ path_progress }}% complete — keep going!</p>
                     <div class="mt-3 flex items-center gap-3">
                         <div class="h-2 flex-1 bg-[#e2e7ff] rounded-full overflow-hidden">
-                            <div class="h-full bg-[#0043ce] rounded-full w-[{{ path_progress }}%]"></div>
+                            <div class="h-full bg-[#0043ce] rounded-full" style="width: {{ path_progress }}%;"></div>
                         </div>
                         <span class="text-sm font-bold">{{ path_progress }}%</span>
                     </div>
-                    <a href="/reconciliation/" class="mt-4 inline-flex items-center gap-2 px-6 py-3 bg-[#0043ce] text-white rounded-xl font-bold text-sm hover:bg-[#1e5af9] transition-all shadow-md">
+                    <a href="{% url 'new_report' %}" class="mt-4 inline-flex items-center gap-2 px-6 py-3 bg-[#0043ce] text-white rounded-xl font-bold text-sm hover:bg-[#1e5af9] transition-all shadow-md">
                         <span class="material-symbols-outlined">sync</span>
                         Check Today's Report
                     </a>

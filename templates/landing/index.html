@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load currency_tags %}
-{% block title %}finanTrace{% endblock %}
+{% block title %}finanTrace - Business Finance Tools for African Entrepreneurs{% endblock %}
 {% block standalone %}
 <div class="min-h-screen bg-[#faf8ff]">
     <nav class="flex items-center justify-between px-10 py-6 max-w-[1440px] mx-auto">
@@ -11,67 +12,74 @@
             <span class="text-2xl font-bold text-[#0043ce]">finanTrace</span>
         </div>
         <div class="flex items-center gap-4">
-            <a href="/guide/" class="px-5 py-2 text-[#0043ce] font-medium hover:bg-[#e2e7ff] rounded-xl transition-colors">Growth Guide</a>
-            <a href="/accounts/login/" class="px-5 py-2 text-[#0043ce] font-medium hover:bg-[#e2e7ff] rounded-xl transition-colors">Log in</a>
-            <a href="/accounts/signup/" class="px-6 py-2.5 bg-[#0043ce] text-white rounded-xl font-medium hover:bg-[#1e5af9] transition-all shadow-md">Start Free</a>
+            <a href="{% url 'growth_guide' %}" class="px-5 py-2 text-[#0043ce] font-medium hover:bg-[#e2e7ff] rounded-xl transition-colors">Growth Guide</a>
+            <a href="{% url 'login' %}" class="px-5 py-2 text-[#0043ce] font-medium hover:bg-[#e2e7ff] rounded-xl transition-colors">Log in</a>
+            <a href="{% url 'signup' %}" class="px-6 py-2.5 bg-[#0043ce] text-white rounded-xl font-medium hover:bg-[#1e5af9] transition-all shadow-md">Start Free</a>
         </div>
     </nav>
     <main class="px-10 pb-20">
         <div class="max-w-[1440px] mx-auto">
             <div class="flex items-center gap-20 py-16">
-                <div class="flex-1">
-                    <div class="inline-flex items-center px-3 py-1 bg-[#006e2f]/10 text-[#006e2f] rounded-full text-xs font-bold mb-6">No experience needed</div>
-                    <h1 class="text-[56px] font-bold leading-[64px] tracking-[-0.02em] text-[#131b2e]">Your business<br><span class="text-[#0043ce]">co-pilot</span></h1>
-                    <p class="text-lg text-[#434656] mt-6 max-w-lg leading-relaxed">Discover AI-powered business ideas, track finances, catch errors before they grow, and follow step-by-step profession paths. Zero experience required.</p>
+                <div class="flex-1 max-w-xl">
+                    <div class="inline-flex items-center px-3 py-1 bg-[#006e2f]/10 text-[#006e2f] rounded-full text-xs font-bold mb-6">Built for Nigerian entrepreneurs</div>
+                    <h1 class="text-[56px] font-bold leading-[64px] tracking-[-0.02em] text-[#131b2e]">Know if your<br><span class="text-[#0043ce]">business is winning</span></h1>
+                    <p class="text-lg text-[#434656] mt-6 leading-relaxed">Upload your daily bank numbers. finanTrace catches errors, tracks your cash flow, and shows you which business ideas actually make sense for your budget and skills. No accounting experience needed.</p>
                     <div class="flex items-center gap-4 mt-10">
-                        <a href="/accounts/signup/" class="px-8 py-4 bg-[#0043ce] text-white rounded-xl font-bold text-lg hover:bg-[#1e5af9] transition-all shadow-lg flex items-center gap-2">
+                        <a href="{% url 'signup' %}" class="px-8 py-4 bg-[#0043ce] text-white rounded-xl font-bold text-lg hover:bg-[#1e5af9] transition-all shadow-lg flex items-center gap-2">
                             Start Free
                             <span class="material-symbols-outlined">arrow_forward</span>
                         </a>
-                        <a href="/guide/" class="px-8 py-4 border border-[#c3c5d9] text-[#131b2e] rounded-xl font-medium hover:bg-white transition-all">How to Grow Any Business</a>
+                        <a href="{% url 'growth_guide' %}" class="px-8 py-4 border border-[#c3c5d9] text-[#131b2e] rounded-xl font-medium hover:bg-white transition-all">How It Works</a>
+                    </div>
+                    <div class="flex items-center gap-8 mt-12 pt-8 border-t border-[#c3c5d9]/20">
+                        <div><span class="text-2xl font-bold text-[#131b2e]">9</span><p class="text-xs text-[#737687]">Researched Ideas</p></div>
+                        <div><span class="text-2xl font-bold text-[#131b2e]">5</span><p class="text-xs text-[#737687]">Profession Paths</p></div>
+                        <div><span class="text-2xl font-bold text-[#131b2e]">₦0</span><p class="text-xs text-[#737687]">To Start</p></div>
                     </div>
                 </div>
-                <div class="flex-1 bg-[#e2e7ff] rounded-3xl p-10 relative overflow-hidden h-[400px]">
-                    <div class="absolute -top-10 -right-10 w-60 h-60 bg-[#0043ce]/5 rounded-full blur-3xl"></div>
-                    <div class="bg-white rounded-2xl p-6 shadow-lg relative z-10">
-                        <div class="flex items-center gap-2 mb-4">
-                            <span class="text-xs font-bold text-[#737687] uppercase">Today's Report</span>
-                            <span class="w-2 h-2 bg-[#006e2f] rounded-full"></span>
+                <div class="flex-1 flex items-center justify-center">
+                    <div class="w-full max-w-md bg-[#e2e7ff] rounded-3xl p-6 relative overflow-hidden" style="min-height: 420px;">
+                        <div class="absolute -bottom-10 -right-10 w-60 h-60 bg-[#0043ce]/5 rounded-full blur-3xl"></div>
+                        <div class="bg-white rounded-2xl p-6 shadow-lg relative z-10">
+                            <div class="flex items-center gap-3 mb-5">
+                                <div class="w-12 h-12 bg-[#131b2e] rounded-full flex items-center justify-center text-white text-sm font-bold">KO</div>
+                                <div><p class="font-bold text-sm">Kola O.</p><p class="text-xs text-[#737687]">Lagos • Fashion Retail</p></div>
+                            </div>
+                            <div class="space-y-3 mb-4">
+                                <div class="flex items-center justify-between p-3 bg-[#f2f3ff] rounded-xl"><span class="text-sm text-[#434656]">Daily check</span><span class="text-sm font-bold">₦285,400</span></div>
+                                <div class="flex items-center justify-between p-3 bg-[#f2f3ff] rounded-xl"><span class="text-sm text-[#434656]">Discrepancies found</span><span class="text-sm font-bold text-[#ba1a1a]">₦12,200</span></div>
+                                <div class="flex items-center justify-between p-3 bg-[#f2f3ff] rounded-xl"><span class="text-sm text-[#434656]">Monthly profit</span><span class="text-sm font-bold text-[#006e2f]">₦89,000</span></div>
+                            </div>
+                            <div class="bg-[#006e2f]/10 rounded-xl p-3 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[#006e2f]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                <span class="text-sm font-bold text-[#006e2f]">2 errors caught this week</span>
+                            </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-4 mb-4">
-                            <div><span class="text-xs text-[#737687]">Opening</span><p class="text-lg font-bold">{{ currency_symbol }}5,000</p></div>
-                            <div><span class="text-xs text-[#737687]">Deposits</span><p class="text-lg font-bold">{{ currency_symbol }}1,200</p></div>
-                            <div><span class="text-xs text-[#737687]">Withdrawals</span><p class="text-lg font-bold">{{ currency_symbol }}400</p></div>
-                            <div><span class="text-xs text-[#737687]">Closing</span><p class="text-lg font-bold">{{ currency_symbol }}5,700</p></div>
-                        </div>
-                        <div class="bg-[#006e2f]/10 rounded-xl p-3 flex items-center gap-2">
-                            <span class="material-symbols-outlined text-[#006e2f]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-                            <span class="text-sm font-bold text-[#006e2f]">Balanced ✓</span>
-                        </div>
+                        <p class="text-center text-xs text-[#737687] mt-4 relative z-10">"I was losing money every month to bank errors I never noticed. finanTrace caught them in 2 minutes."</p>
                     </div>
                 </div>
             </div>
             <div class="grid grid-cols-3 gap-8 mt-20">
-                <a href="/guide/" class="block bg-white p-8 rounded-2xl border border-[#c3c5d9]/30 hover:shadow-lg transition-all group">
+                <a href="{% url 'growth_guide' %}" class="block bg-white p-8 rounded-2xl border border-[#c3c5d9]/30 hover:shadow-lg transition-all group">
                     <div class="w-12 h-12 bg-[#0043ce]/10 rounded-xl flex items-center justify-center text-[#0043ce] mb-5">
                         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>
                     </div>
                     <h3 class="text-xl font-bold mb-3 group-hover:text-[#0043ce] transition-colors">Business Growth Guide</h3>
                     <p class="text-[#434656] text-sm">New here? Start with our 5-phase playbook. From zero idea to growing business — follow the system.</p>
                 </a>
-                <a href="/ideas/" class="block bg-white p-8 rounded-2xl border border-[#c3c5d9]/30 hover:shadow-lg transition-all group">
+                <a href="{% url 'ideas_feed' %}" class="block bg-white p-8 rounded-2xl border border-[#c3c5d9]/30 hover:shadow-lg transition-all group">
                     <div class="w-12 h-12 bg-[#1e5af9]/10 rounded-xl flex items-center justify-center text-[#1e5af9] mb-5">
                         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">explore</span>
                     </div>
                     <h3 class="text-xl font-bold mb-3 group-hover:text-[#0043ce] transition-colors">Idea Discovery</h3>
-                    <p class="text-[#434656] text-sm">Browse 9 researched business ideas with transparent costs, timelines, and demand scores.</p>
+                    <p class="text-[#434656] text-sm">Browse 9 researched business ideas with transparent costs, timelines, and demand scores — find what fits you.</p>
                 </a>
                 <div class="bg-white p-8 rounded-2xl border border-[#c3c5d9]/30">
                     <div class="w-12 h-12 bg-[#006e2f]/10 rounded-xl flex items-center justify-center text-[#006e2f] mb-5">
                         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">sync_alt</span>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Error Detection</h3>
-                    <p class="text-[#434656] text-sm">Enter your daily bank numbers. We instantly flag discrepancies and trace the cause in plain English.</p>
+                    <p class="text-[#434656] text-sm">Enter your daily bank numbers. We instantly flag discrepancies and show you exactly where the money went.</p>
                 </div>
             </div>
             <div class="mt-20">
@@ -88,35 +96,35 @@
                             <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm">3 bank report checks</span></li>
                             <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm">Basic error detection</span></li>
                         </ul>
-                        <a href="/accounts/signup/" class="block w-full py-3 border border-[#c3c5d9] text-center rounded-xl font-medium hover:bg-[#f2f3ff] transition-colors">Get Started</a>
+                        <a href="{% url 'signup' %}" class="block w-full py-3 border border-[#c3c5d9] text-center rounded-xl font-medium hover:bg-[#f2f3ff] transition-colors">Get Started</a>
                     </div>
                     <div class="bg-white rounded-2xl p-8 border-2 border-[#0043ce] text-left relative">
                         <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#0043ce] text-white px-4 py-1 rounded-full text-xs font-bold">POPULAR</div>
                         <h3 class="text-xl font-bold mb-1">Startup</h3>
-                        <p class="text-4xl font-bold mb-2">{{ currency_symbol }}5<span class="text-lg text-[#737687]">/mo</span></p>
+                        <p class="text-4xl font-bold mb-2">{{ currency_symbol }}7,500<span class="text-lg text-[#737687]">/mo</span></p>
                         <ul class="space-y-3 mb-8 mt-6">
                             <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm">Unlimited idea research & full analysis</span></li>
                             <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm">Unlimited bank checks + full trace engine</span></li>
                             <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm">All 5 profession paths</span></li>
                             <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm">Revenue & expense tracking</span></li>
                         </ul>
-                        <a href="/accounts/signup/" class="block w-full py-3 bg-[#0043ce] text-white text-center rounded-xl font-bold hover:bg-[#1e5af9] transition-all shadow-md">Subscribe {{ currency_symbol }}5/mo</a>
+                        <a href="{% url 'signup' %}" class="block w-full py-3 bg-[#0043ce] text-white text-center rounded-xl font-bold hover:bg-[#1e5af9] transition-all shadow-md">Subscribe {{ currency_symbol }}7,500/mo</a>
                         <p class="text-center text-xs text-[#006e2f] font-bold mt-2">&#9733; 7-day free trial</p>
                     </div>
                     <div class="bg-white rounded-2xl p-8 border border-[#c3c5d9]/30 text-left">
                         <h3 class="text-xl font-bold mb-1">Growing</h3>
-                        <p class="text-4xl font-bold mb-2">{{ currency_symbol }}10<span class="text-lg text-[#737687]">/mo</span></p>
+                        <p class="text-4xl font-bold mb-2">{{ currency_symbol }}15,000<span class="text-lg text-[#737687]">/mo</span></p>
                         <ul class="space-y-3 mb-8 mt-6">
                             <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm">Everything in Startup +</span></li>
                             <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm">AI personalized idea suggestions</span></li>
                             <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm">Real-time alerts & analytics</span></li>
                             <li class="flex items-start gap-3"><span class="material-symbols-outlined text-[#006e2f] text-sm" style="font-variation-settings: 'FILL' 1;">check</span><span class="text-sm">Priority support</span></li>
                         </ul>
-                        <a href="/accounts/signup/" class="block w-full py-3 bg-[#131b2e] text-white text-center rounded-xl font-bold hover:bg-[#434656] transition-all shadow-md">Subscribe {{ currency_symbol }}10/mo</a>
+                        <a href="{% url 'signup' %}" class="block w-full py-3 bg-[#131b2e] text-white text-center rounded-xl font-bold hover:bg-[#434656] transition-all shadow-md">Subscribe {{ currency_symbol }}15,000/mo</a>
                     </div>
                 </div>
                 <div class="text-center mt-8">
-                    <a href="/pricing/" class="text-[#0043ce] font-bold hover:underline text-sm">View full comparison table & satisfaction guarantees →</a>
+                    <a href="{% url 'payments_pricing' %}" class="text-[#0043ce] font-bold hover:underline text-sm">View full comparison table & satisfaction guarantees →</a>
                 </div>
             </div>
         </div>

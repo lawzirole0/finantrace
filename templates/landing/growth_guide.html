@@ -14,7 +14,7 @@
         </div>
         <div class="flex items-center gap-4">
             <a href="/pricing/" class="px-5 py-2 text-[#0043ce] font-medium hover:bg-[#e2e7ff] rounded-xl transition-colors">Pricing</a>
-            <a href="/accounts/signup/" class="px-6 py-2.5 bg-[#0043ce] text-white rounded-xl font-medium hover:bg-[#1e5af9] transition-all shadow-md">Start Free</a>
+            <a href="{% url 'account_signup' %}" class="px-6 py-2.5 bg-[#0043ce] text-white rounded-xl font-medium hover:bg-[#1e5af9] transition-all shadow-md">Start Free</a>
         </div>
     </nav>
     <main class="px-10 pb-20">
@@ -24,7 +24,7 @@
                 <h1 class="text-[48px] font-bold leading-[56px] tracking-[-0.02em] text-[#131b2e]">How to grow any business<br><span class="text-[#0043ce]">from zero to success</span></h1>
                 <p class="text-lg text-[#434656] mt-6 max-w-2xl mx-auto leading-relaxed">A simple 5-phase playbook. Whether you're a freelancer, retailer, or creator — every business follows the same growth path. Follow these phases in order.</p>
                 <div class="flex items-center justify-center gap-4 mt-10">
-                    <a href="/accounts/signup/" class="px-8 py-4 bg-[#0043ce] text-white rounded-xl font-bold text-lg hover:bg-[#1e5af9] transition-all shadow-lg flex items-center gap-2">
+                    <a href="{% url 'account_signup' %}" class="px-8 py-4 bg-[#0043ce] text-white rounded-xl font-bold text-lg hover:bg-[#1e5af9] transition-all shadow-lg flex items-center gap-2">
                         Start Your Journey
                         <span class="material-symbols-outlined">arrow_forward</span>
                     </a>
@@ -292,7 +292,7 @@
                 <h2 class="text-3xl font-bold mb-4">Ready to start your journey?</h2>
                 <p class="text-lg text-[#434656] mb-8 max-w-xl mx-auto">You don't need experience. You don't need a big budget. You just need to start and follow the system.</p>
                 <div class="flex items-center justify-center gap-4">
-                    <a href="/accounts/signup/" class="px-8 py-4 bg-[#0043ce] text-white rounded-xl font-bold text-lg hover:bg-[#1e5af9] transition-all shadow-lg flex items-center gap-2">
+                    <a href="{% url 'account_signup' %}" class="px-8 py-4 bg-[#0043ce] text-white rounded-xl font-bold text-lg hover:bg-[#1e5af9] transition-all shadow-lg flex items-center gap-2">
                         Start Free - {{ currency_symbol }}0
                         <span class="material-symbols-outlined">arrow_forward</span>
                     </a>

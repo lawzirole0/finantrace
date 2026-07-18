@@ -51,7 +51,7 @@
             <div class="w-16 h-16 bg-[#f2f3ff] rounded-2xl flex items-center justify-center text-[#0043ce] mb-6"><span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">account_balance</span></div>
             <h3 class="text-xl font-bold mb-2">No transactions yet</h3>
             <p class="text-sm text-[#434656] max-w-md">Track your income and expenses to see your cash flow at a glance.</p>
-            <a href="{% url 'finance_overview' %}" class="mt-6 px-6 py-3 bg-[#0043ce] text-white rounded-xl font-bold hover:bg-[#1e5af9] transition-all shadow-md">Add Your First Transaction</a>
+            <a href="{% url 'finance' %}" class="mt-6 px-6 py-3 bg-[#0043ce] text-white rounded-xl font-bold hover:bg-[#1e5af9] transition-all shadow-md">Add Your First Transaction</a>
         </div>
         {% endif %}
     </div>
@@ -102,7 +102,7 @@
                 <h3 class="text-xl font-bold">Your Path Progress</h3>
                 <p class="text-xs text-[#737687]">Current Stage: {{ profession_data.name|default:"Getting Started" }}</p>
             </div>
-            <a href="{% url 'paths_home' %}" class="text-[#0043ce] font-bold text-sm hover:underline">Full Path</a>
+            <a href="{% url 'paths' %}" class="text-[#0043ce] font-bold text-sm hover:underline">Full Path</a>
         </div>
         <div class="flex items-center gap-4 relative mb-8">
             <div class="flex-1 flex items-center">
